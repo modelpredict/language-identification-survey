@@ -1,3 +1,10 @@
+# Dataset files
+datasets/**/**.bz2
+datasets/**/**.gzip
+datasets/**/**.csv
+
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
