@@ -39,3 +39,4 @@ lang=[r.language for r in results]
 prob=[r.probability for r in results]
 result_df = pd.DataFrame(index=dataset.index[:n],data=dict(lang=lang, prob=prob))
 result_df.to_csv('results.csv', header=None)
+np.save('times.npy', elapsed)
