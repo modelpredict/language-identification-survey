@@ -16,7 +16,7 @@ total_start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
 results = []
 n = len(dataset)
 elapsed = np.zeros((n,))
-for i, text in tqdm.tqdm(enumerate(dataset.text[:n])):
+for i, text in enumerate(tqdm.tqdm(dataset.text[:n])):
   iter_start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
   result = detector.FindLanguage(text=text)
   elapsed[i] = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - iter_start_time
