@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
   parser = argparse.ArgumentParser(description='Run benchmark for given model.')
   parser.add_argument('benchmarks', nargs='+')
-  parser.add_argument('--input-size', '-n', type=int)  # TODO
+  parser.add_argument('--examples-count', '-n', type=int)
   args = parser.parse_args()
 
   print('Loading dataset...')
@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     print(f'Running {benchmark_name}...')
     total_start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
-    n = len(dataset)
+    n = args.examples_count or len(dataset)
     elapsed = np.zeros((n,))
     predictions = benchmark(tqdm.tqdm(dataset.text[:n]), elapsed)
 
