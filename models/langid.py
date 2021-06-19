@@ -1,7 +1,9 @@
 import langid
 import time
+from collections import namedtuple
 
-detector = None
+Result = namedtuple('res', ['language', 'probability'])
+
 
 def run(dataset, elapsed):
   results = []
@@ -12,4 +14,11 @@ def run(dataset, elapsed):
     elapsed[i] = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - iter_start_time
     results.append(result)
 
-  return results
+  return convert_results(results)
+
+
+def convert_results(results):
+  converted = []
+  for r in results:
+    converted.append(Result(r[0], r[1]))
+  return converted
