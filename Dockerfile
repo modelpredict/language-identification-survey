@@ -2,8 +2,12 @@ FROM python:3.9-buster
 
 RUN apt update
 RUN apt install -y protobuf-compiler
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
 
-COPY run.py /src/
-COPY datasets /src/datasets
+WORKDIR /src
+
+# other libraries
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
+COPY run.py ./
+COPY datasets ./datasets

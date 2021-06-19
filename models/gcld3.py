@@ -3,6 +3,8 @@ import time
 
 detector = None
 
+# https://github.com/google/cld3
+
 def run(dataset, elapsed):
   detector = gcld3.NNetLanguageIdentifier(min_num_bytes=0, max_num_bytes=3000)
   results = []

@@ -1,11 +1,8 @@
 # language-identification-survey
 Live survey of off-the-shelf language identification tools for python
 
-## GCLD3
+## Running
 ```bash
-cd models/gcld3
-./copy_dataset.sh
-docker build -t gcld3 .
-docker run -v `pwd`:/src -t -i gcld3 python /src/run.py
+docker build -t bench .
+docker run -v `pwd`:/src -t -i python /src/run.py fasttext-compressed
 ```
-

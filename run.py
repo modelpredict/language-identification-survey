@@ -4,13 +4,18 @@ import tqdm
 import numpy as np
 import os
 import argparse
-from models import gcld3, langid
+from functools import partial
+from models import gcld3, langid, langdetect, pycld2, fasttext
 
 
 DATASET_PATH = 'datasets/tatoeba-sentences-2021-06-05/sentences.csv'
 BENCHMARKS = {
   'langid': langid.run,
   'gcld3': gcld3.run,
+  'pycld2': pycld2.run,
+  'langdetect': langdetect.run,
+  'fasttext': partial(fasttext.run, model_path=fasttext.MODEL_BIN),
+  'fasttext-compressed': partial(fasttext.run, model_path=fasttext.MODEL_COMPRESSED),
 }
 
 
