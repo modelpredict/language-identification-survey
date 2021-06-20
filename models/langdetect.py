@@ -1,26 +1,25 @@
 import langdetect
 import time
-from collections import namedtuple
+import numpy as np
 
-Result = namedtuple('res', ['language', 'probability'])
 
 def run(dataset, elapsed):
-  results = []
+  lang = np.chararray(len(dataset), itemsize=10)
+  prob = np.zeros((len(dataset),), dtype=np.float)
 
   for i, text in enumerate(dataset):
-    iter_start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
-    result = langdetect.detect_langs(text)
-    elapsed[i] = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - iter_start_time
-    results.append(result)
+    try:
+      iter_start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
+      result = langdetect.detect_langs(text)
+      elapsed[i] = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - iter_start_time
+    except:
+      result = None
 
-  return convert_results(results)
-
-
-def convert_results(results):
-  converted = []
-  for r in results:
-    if not r:
-      converted.append(Result(None, None))
+    if result:
+      lang[i] = result[0].lang
+      prob[i] = result[0].prob
     else:
-      converted.append(Result(r[0].lang, r[0].prob))
-  return converted
+      lang[i] = 'n/a'
+      prob[i] = float('nan')
+
+  return dict(lang=lang, prob=prob)

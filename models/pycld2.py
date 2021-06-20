@@ -1,24 +1,17 @@
 import pycld2
 import time
-from collections import namedtuple
-
-Result = namedtuple('res', ['language', 'probability'])
+import numpy as np
 
 def run(dataset, elapsed):
-  results = []
+  lang = np.chararray(len(dataset), itemsize=10)
+  prob = np.zeros((len(dataset),), dtype=np.float)
 
   for i, text in enumerate(dataset):
     iter_start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
     result = pycld2.detect(text)
     elapsed[i] = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - iter_start_time
-    results.append(result)
 
-  return convert_results(results)
+    lang[i] = result[2][0][1]
+    prob[i] = float('nan')
 
-
-def convert_results(results):
-  converted = []
-  for r in results:
-    best_lang = r[2][0]
-    converted.append(Result(best_lang[1], None))
-  return converted
+  return dict(lang=lang, prob=prob)

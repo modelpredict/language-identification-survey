@@ -1,24 +1,18 @@
 import langid
 import time
-from collections import namedtuple
-
-Result = namedtuple('res', ['language', 'probability'])
+import numpy as np
 
 
 def run(dataset, elapsed):
-  results = []
+  lang = np.chararray(len(dataset), itemsize=10)
+  prob = np.zeros((len(dataset),), dtype=np.float)
 
   for i, text in enumerate(dataset):
     iter_start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
     result = langid.classify(text)
     elapsed[i] = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - iter_start_time
-    results.append(result)
 
-  return convert_results(results)
+    lang[i] = result[0]
+    prob[i] = result[1]
 
-
-def convert_results(results):
-  converted = []
-  for r in results:
-    converted.append(Result(r[0], r[1]))
-  return converted
+  return dict(lang=lang, prob=prob)

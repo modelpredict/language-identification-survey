@@ -6,3 +6,4 @@ pandas==1.2.4
 pycld2==0.41
 pycountry==20.7.3
 tqdm==4.61.0
+ipython

@@ -4,6 +4,7 @@ import tqdm
 import numpy as np
 import os
 import argparse
+import csv
 from functools import partial
 from models import gcld3, langid, langdetect, pycld2, fasttext
 
@@ -35,10 +36,10 @@ def report_basic_timings(elapsed_in_fn, total_elapsed):
 
 
 def save_predictions(dst, results):
-    lang=[r.language for r in results]
-    prob=[r.probability for r in results]
-    result_df = pd.DataFrame(index=dataset.index[:n],data=dict(lang=lang, prob=prob))
-    result_df.to_csv(dst, header=None)
+  with open(dst, mode='w') as fd:
+    writer = csv.writer(fd, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    for idx, lang, prob in zip(dataset.index[:n], results['lang'], results['prob']):
+      writer.writerow([idx, lang.decode('utf-8'), prob])
 
 
 if __name__ == "__main__":
