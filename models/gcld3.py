@@ -1,8 +1,11 @@
+from models.fasttext import SUPPORTED_LANGUAGES
 import gcld3
 import time
 import numpy as np
 
 # https://github.com/google/cld3
+
+SUPPORTED_LANGUAGES = "af am ar bg bg-Latn bn bs ca ceb co cs cy da de el el-Latn en eo es et eu fa fi fil fr fy ga gd gl gu ha haw hi hi-Latn hmn hr ht hu hy id ig is it iw ja ja-Latn jv ka kk km kn ko ku ky la lb lo lt lv mg mi mk ml mn mr ms mt my ne nl no ny pa pl ps pt ro ru ru-Latn sd si sk sl sm sn so sq sr st su sv sw ta te tg th tr uk ur uz vi xh yi yo zh zh-Latn zu".split(" ")
 
 def run(dataset, elapsed):
   detector = gcld3.NNetLanguageIdentifier(min_num_bytes=0, max_num_bytes=3000)

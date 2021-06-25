@@ -6,10 +6,11 @@ import os
 import argparse
 import csv
 from functools import partial
+
+import datasets
 from models import gcld3, langid, langdetect, pycld2, fasttext
 
 
-DATASET_PATH = 'datasets/tatoeba-sentences-2021-06-05/sentences.csv'
 BENCHMARKS = {
   'langid': langid.run,
   'gcld3': gcld3.run,
@@ -18,10 +19,6 @@ BENCHMARKS = {
   'fasttext': partial(fasttext.run, model_path=fasttext.MODEL_BIN),
   'fasttext-compressed': partial(fasttext.run, model_path=fasttext.MODEL_COMPRESSED),
 }
-
-
-def load_dataset(path=DATASET_PATH):
-  return pd.read_csv(path, sep='\t', index_col=0, names=['language', 'text'])
 
 
 def report_basic_timings(elapsed_in_fn, total_elapsed):
@@ -51,7 +48,7 @@ if __name__ == "__main__":
   args = parser.parse_args()
 
   print('Loading dataset...')
-  dataset = load_dataset()
+  dataset = datasets.tatoeba_2021_06_05()
 
   for benchmark_name in args.benchmarks:
     benchmark = BENCHMARKS[benchmark_name]
