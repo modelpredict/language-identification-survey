@@ -11,13 +11,16 @@ import models.langid
 def get_iso_alpha3(label):
     if not label:
         return None
+
+    if label == 'zh-cn':
+      return 'cmn'
+
     if len(label) == 2:
         lang = pycountry.languages.get(alpha_2=label)
     else:
         lang = pycountry.languages.get(alpha_3=label)
     if lang:
         return lang.alpha_3
-
     return label
 
 
@@ -54,7 +57,7 @@ BENCHMARKS = {
 
 if __name__ == "__main__":
   dataset_name = 'tatoeba-sentences-2021-06-05'
-  benchmark_name = 'langid'
+  benchmark_name = 'fasttext-compressed'
 
   print(f"Analyzing {benchmark_name} on {dataset_name}")
   dataset = datasets.tatoeba_2021_06_05()
