@@ -30,10 +30,6 @@ def read_results(dataset_name, benchmark_name='fasttext'):
   return results
 
 
-def get_supported_dataset_subset(dataset, supported_languages):
-  return dataset[dataset['language'].isin(supported_languages)]
-
-
 def join_results(dataset, results):
   joined = dataset.join(results)
   joined['correct'] = (joined['language'] == joined['iso_lang_code']).astype(int)
@@ -63,7 +59,7 @@ if __name__ == "__main__":
   dataset = datasets.tatoeba_2021_06_05()
   results = read_results('tatoeba-sentences-2021-06-05', benchmark_name)
   supported_langs = BENCHMARKS[benchmark_name]['supported_languages']
-  dataset_subset = get_supported_dataset_subset(dataset, supported_languages=supported_langs)
+  dataset_subset = datasets.get_supported_dataset_subset(dataset, supported_languages=supported_langs)
   joined_results = join_results(dataset_subset, results)
 
   accuracy = joined_results['correct'].mean()

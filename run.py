@@ -1,4 +1,3 @@
-import pandas as pd
 import time
 import tqdm
 import numpy as np
@@ -9,15 +8,34 @@ from functools import partial
 
 import datasets
 from models import gcld3, langid, langdetect, pycld2, fasttext
+from analysis import get_iso_alpha3
 
 
 BENCHMARKS = {
-  'langid': langid.run,
-  'gcld3': gcld3.run,
-  'pycld2': pycld2.run,
-  'langdetect': langdetect.run,
-  'fasttext': partial(fasttext.run, model_path=fasttext.MODEL_BIN),
-  'fasttext-compressed': partial(fasttext.run, model_path=fasttext.MODEL_COMPRESSED),
+  'fasttext': {
+    'run': partial(fasttext.run, model_path=fasttext.MODEL_BIN),
+    'supported_languages': [get_iso_alpha3(lang) for lang in fasttext.SUPPORTED_LANGUAGES],
+  },
+  'fasttext-compressed': {
+    'run': partial(fasttext.run, model_path=fasttext.MODEL_COMPRESSED),
+    'supported_languages': [get_iso_alpha3(lang) for lang in fasttext.SUPPORTED_LANGUAGES],
+  },
+  'gcld3': {
+    'run': gcld3.run,
+    'supported_languages': [get_iso_alpha3(lang) for lang in gcld3.SUPPORTED_LANGUAGES],
+  },
+  'langdetect': {
+    'run': langdetect.run,
+    'supported_languages': [get_iso_alpha3(lang) for lang in langdetect.SUPPORTED_LANGUAGES],
+  },
+  'langid': {
+    'run': langid.run,
+    'supported_languages': [get_iso_alpha3(lang) for lang in langid.SUPPORTED_LANGUAGES],
+  },
+  'pycld2': {
+    'run': pycld2.run,
+    'supported_languages': [get_iso_alpha3(lang) for lang in pycld2.SUPPORTED_LANGUAGES],
+  },
 }
 
 
@@ -48,7 +66,7 @@ if __name__ == "__main__":
   parser.add_argument('--examples-hi', '-hi', type=int)
   args = parser.parse_args()
 
-  print('Loading dataset...')
+  print('Loading big dataset...')
   dataset = datasets.tatoeba_2021_06_05()
   dataset_name = "tatoeba-sentences-2021-06-05"
 
@@ -58,13 +76,15 @@ if __name__ == "__main__":
 
     lo = args.examples_lo or 0
     hi = args.examples_hi or len(dataset)
-    benchmark_dataset = dataset[lo:hi]
-    print(f'Loaded relevant subset of dataset. Size={len(benchmark_dataset)}')
+    supported_dataset = datasets.get_supported_dataset_subset(dataset, benchmark['supported_languages'])
+    print(f'Benchmark supports {len(supported_dataset)}/{len(dataset)} ({100*len(supported_dataset)/len(dataset)}%) items')
+    benchmark_dataset = supported_dataset[lo:hi]
+    print(f'Getting the chosen slice of the dataset (lo={lo} hi={hi}). Size={len(benchmark_dataset)}')
 
     print(f'Running {benchmark_name}...')
     total_start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
     elapsed = np.zeros((hi-lo,))
-    predictions = benchmark(tqdm.tqdm(benchmark_dataset.text), elapsed)
+    predictions = benchmark['run'](tqdm.tqdm(benchmark_dataset.text), elapsed)
 
     os.makedirs(f'results/{dataset_name}/{benchmark_name}/', exist_ok=True)
 
