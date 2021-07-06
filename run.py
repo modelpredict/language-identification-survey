@@ -4,39 +4,10 @@ import numpy as np
 import os
 import argparse
 import csv
-from functools import partial
 
 import datasets
-from models import gcld3, langid, langdetect, pycld2, fasttext
-from analysis import get_iso_alpha3
 
-
-BENCHMARKS = {
-  'fasttext': {
-    'run': partial(fasttext.run, model_path=fasttext.MODEL_BIN),
-    'supported_languages': [get_iso_alpha3(lang) for lang in fasttext.SUPPORTED_LANGUAGES],
-  },
-  'fasttext-compressed': {
-    'run': partial(fasttext.run, model_path=fasttext.MODEL_COMPRESSED),
-    'supported_languages': [get_iso_alpha3(lang) for lang in fasttext.SUPPORTED_LANGUAGES],
-  },
-  'gcld3': {
-    'run': gcld3.run,
-    'supported_languages': [get_iso_alpha3(lang) for lang in gcld3.SUPPORTED_LANGUAGES],
-  },
-  'langdetect': {
-    'run': langdetect.run,
-    'supported_languages': [get_iso_alpha3(lang) for lang in langdetect.SUPPORTED_LANGUAGES],
-  },
-  'langid': {
-    'run': langid.run,
-    'supported_languages': [get_iso_alpha3(lang) for lang in langid.SUPPORTED_LANGUAGES],
-  },
-  'pycld2': {
-    'run': pycld2.run,
-    'supported_languages': [get_iso_alpha3(lang) for lang in pycld2.SUPPORTED_LANGUAGES],
-  },
-}
+from benchmarks import BENCHMARKS
 
 
 def report_basic_timings(elapsed_in_fn, total_elapsed):
@@ -74,9 +45,9 @@ if __name__ == "__main__":
     benchmark = BENCHMARKS[benchmark_name]
     print(f'Loaded benchmark {benchmark_name}')
 
-    lo = args.examples_lo or 0
-    hi = args.examples_hi or len(dataset)
     supported_dataset = datasets.get_supported_dataset_subset(dataset, benchmark['supported_languages'])
+    lo = args.examples_lo or 0
+    hi = args.examples_hi or len(supported_dataset)
     print(f'Benchmark supports {len(supported_dataset)}/{len(dataset)} ({100*len(supported_dataset)/len(dataset)}%) items')
     benchmark_dataset = supported_dataset[lo:hi]
     print(f'Getting the chosen slice of the dataset (lo={lo} hi={hi}). Size={len(benchmark_dataset)}')
