@@ -1,10 +1,11 @@
 fasttext==0.9.2
 gcld3==3.0.13
+iso-639==0.4.5
 langdetect==1.0.9
 langid==1.1.6
 pandas==1.2.4
 pycld2==0.41
 pycountry==20.7.3
-tqdm==4.61.0
 tabulate==0.8.9
+tqdm==4.61.0
 ipython
