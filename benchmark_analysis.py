@@ -14,6 +14,8 @@ from langtools import get_iso_alpha3
 def read_results(dataset_name, benchmark_name='fasttext'):
   results_path = os.path.join('results', dataset_name, benchmark_name, 'results.csv')
   results = pd.read_csv(results_path, sep=',', index_col=0, names=['detected_lang', 'detected_prob'])
+  # langdetect returns nan for small number of rows. We'll just convert them to strings
+  results['detected_lang'] = results['detected_lang'].astype(str)
   results['iso_lang_code'] = results['detected_lang'].apply(lambda x: get_iso_alpha3(x.replace('__label__', '')))
   return results
 
