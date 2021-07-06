@@ -1,4 +1,5 @@
 import os
+import pathlib
 import argparse
 import pandas as pd
 import numpy as np
@@ -44,8 +45,7 @@ def get_stats_per_language(results):
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Write aggregated results files.')
-  parser.add_argument('benchmarks', nargs='+')
-  parser.add_argument('--dataset_name', type=str, default='tatoeba-sentences-2021-06-05')
+  parser.add_argument('--dataset_name', '-d', type=str, default='tatoeba-sentences-2021-06-05')
   args = parser.parse_args()
 
   jinja_env = Environment(loader=FileSystemLoader("./templates"), autoescape=select_autoescape())
@@ -53,8 +53,13 @@ if __name__ == "__main__":
   dataset_name = args.dataset_name
   dataset = datasets.get(dataset_name)
 
-  for benchmark_name in args.benchmarks:
-    print(f"Analyzing {benchmark_name} results on {dataset_name}")
+  for benchmark_name in BENCHMARKS.keys():
+    benchmark_results_path = pathlib.Path('results') / dataset_name / benchmark_name
+    if not benchmark_results_path.exists():
+      print(f"Skipping {benchmark_name}. Results files not found on {benchmark_results_path}")
+
+    print(f"Analyzing {benchmark_name} results on {dataset_name}...")
+
     results = read_results(dataset_name, benchmark_name)
     supported_langs = BENCHMARKS[benchmark_name]['supported_languages']
     dataset_subset = datasets.get_supported_dataset_subset(dataset, supported_languages=supported_langs)
