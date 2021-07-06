@@ -36,7 +36,7 @@ if __name__ == "__main__":
   # Hardcoded dataset name
   print(f"Dumping stats for dataset {DATASET_NAME}")
 
-  ds = datasets.tatoeba_2021_06_05()
+  ds = datasets.tatoeba_sentences_2021_06_05()
   stats_df = get_stats_table(ds)
 
   with open(os.path.join('datasets', DATASET_NAME, 'stats.md'), 'w') as fd:

@@ -38,7 +38,7 @@ if __name__ == "__main__":
   args = parser.parse_args()
 
   print('Loading big dataset...')
-  dataset = datasets.tatoeba_2021_06_05()
+  dataset = datasets.tatoeba_sentences_2021_06_05()
   dataset_name = "tatoeba-sentences-2021-06-05"
 
   for benchmark_name in args.benchmarks:
