@@ -25,41 +25,52 @@ def join_results(dataset, results):
   return joined
 
 
+def get_stats_per_language(results):
+  accuracy_per_language = results.groupby('language').agg({'correct': [np.mean, 'count']}).reset_index()
+  accuracy_per_language.columns = ['language_iso639_3', 'accuracy', 'sentences']
+
+  accuracy_per_language['language'] = accuracy_per_language['language_iso639_3'].apply(dataset_analysis.get_language_name)
+  accuracy_per_language['sentences'] = accuracy_per_language['sentences'].astype(np.int32)
+
+  # sort and set index
+  accuracy_per_language.sort_values(['sentences'], ascending=False, inplace=True)
+  accuracy_per_language.reset_index(inplace=True)
+  accuracy_per_language.index += 1
+
+  return accuracy_per_language[['language_iso639_3', 'language', 'sentences', 'accuracy']]
+
+
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Write aggregated results files.')
   parser.add_argument('benchmarks', nargs='+')
   parser.add_argument('--dataset_name', type=str, default='tatoeba-sentences-2021-06-05')
-
   args = parser.parse_args()
 
   jinja_env = Environment(loader=FileSystemLoader("./templates"), autoescape=select_autoescape())
 
   dataset_name = args.dataset_name
+  dataset = datasets.get(dataset_name)
+
   for benchmark_name in args.benchmarks:
     print(f"Analyzing {benchmark_name} results on {dataset_name}")
-    dataset = datasets.get(dataset_name)
     results = read_results(dataset_name, benchmark_name)
     supported_langs = BENCHMARKS[benchmark_name]['supported_languages']
     dataset_subset = datasets.get_supported_dataset_subset(dataset, supported_languages=supported_langs)
+    joined_results = join_results(dataset_subset, results)
 
     dataset_stats = dataset_analysis.get_stats_table(dataset_subset)
 
-    joined_results = join_results(dataset_subset, results)
+    aggregated_accuracy = joined_results['correct'].mean()
+    stats_per_language = get_stats_per_language(joined_results)
 
-    accuracy = joined_results['correct'].mean()
-
-    accuracy_per_language = joined_results.groupby('language').agg({'correct': [np.mean, 'count']})
-    accuracy_per_language.columns = ['accuracy', 'datapoints']
-    accuracy_per_language['datapoints'] = accuracy_per_language['datapoints'].astype(int)
-    accuracy_per_language = accuracy_per_language.sort_values(['accuracy'], ascending=False)
-
+    # assemble the md file and write it
     tmpl = jinja_env.get_template('model_results.md')
     rendered = tmpl.render(
       benchmark_name=benchmark_name,
       dataset_name=dataset_name,
       dataset_stats=dataset_stats.to_markdown(),
-      accuracy=accuracy,
-      stats_per_language=accuracy_per_language.to_markdown(floatfmt=".3f"),
+      accuracy=aggregated_accuracy,
+      stats_per_language=stats_per_language.to_markdown(floatfmt=".3f"),
     )
     results_path = os.path.join('results', dataset_name, benchmark_name, 'results.md')
     with open(results_path, 'w') as fd:
