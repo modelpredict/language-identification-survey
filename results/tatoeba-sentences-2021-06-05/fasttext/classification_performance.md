@@ -1,11 +1,9 @@
-# Results for fasttext on tatoeba-sentences-2021-06-05
-
-## Performance
+# Classification performance for fasttext on tatoeba-sentences-2021-06-05
 
 - Total number of sentences: 8434747
 - **Aggregated accuracy: 0.9835549305746811**
 
-### Stats per language
+## Stats per language
 |     | language_alpha3   | language                                                   |   sentences_count |   precision |   recall |      tp |    fp |      tn |    fn |
 |----:|:------------------|:-----------------------------------------------------------|------------------:|------------:|---------:|--------:|------:|--------:|------:|
 |   1 | eng               | English                                                    |           1479733 |       0.991 |    0.999 | 1478395 | 13192 | 6941822 |  1338 |

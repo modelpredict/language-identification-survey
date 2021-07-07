@@ -1,11 +1,9 @@
-# Results for langdetect on tatoeba-sentences-2021-06-05
-
-## Performance
+# Classification performance for langdetect on tatoeba-sentences-2021-06-05
 
 - Total number of sentences: 7515809
 - **Aggregated accuracy: 0.9216979835437542**
 
-### Stats per language
+## Stats per language
 |    | language_alpha3   | language             |   sentences_count |   precision |   recall |      tp |    fp |      tn |    fn |
 |---:|:------------------|:---------------------|------------------:|------------:|---------:|--------:|------:|--------:|------:|
 |  1 | eng               | English              |           1479733 |       0.988 |    0.933 | 1381147 | 16948 | 6019128 | 98586 |

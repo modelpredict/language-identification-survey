@@ -1,11 +1,9 @@
-# Results for pycld2 on tatoeba-sentences-2021-06-05
-
-## Performance
+# Classification performance for pycld2 on tatoeba-sentences-2021-06-05
 
 - Total number of sentences: 7357485
 - **Aggregated accuracy: 0.8703998716952872**
 
-### Stats per language
+## Stats per language
 |    | language_alpha3   | language              |   sentences_count |   precision |   recall |      tp |    fp |      tn |     fn |
 |---:|:------------------|:----------------------|------------------:|------------:|---------:|--------:|------:|--------:|-------:|
 |  1 | eng               | English               |           1479733 |       0.954 |    0.970 | 1435203 | 68588 | 5809164 |  44530 |

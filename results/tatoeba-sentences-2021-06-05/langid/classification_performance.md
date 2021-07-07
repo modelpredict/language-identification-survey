@@ -1,11 +1,9 @@
-# Results for langid on tatoeba-sentences-2021-06-05
-
-## Performance
+# Classification performance for langid on tatoeba-sentences-2021-06-05
 
 - Total number of sentences: 8298609
 - **Aggregated accuracy: 0.8892028772532843**
 
-### Stats per language
+## Stats per language
 |    | language_alpha3   | language              |   sentences_count |   precision |   recall |      tp |    fp |      tn |     fn |
 |---:|:------------------|:----------------------|------------------:|------------:|---------:|--------:|------:|--------:|-------:|
 |  1 | eng               | English               |           1479733 |       0.953 |    0.973 | 1439789 | 70832 | 6748044 |  39944 |

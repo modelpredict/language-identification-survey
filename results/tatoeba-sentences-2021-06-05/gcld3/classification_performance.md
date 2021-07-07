@@ -1,11 +1,9 @@
-# Results for gcld3 on tatoeba-sentences-2021-06-05
-
-## Performance
+# Classification performance for gcld3 on tatoeba-sentences-2021-06-05
 
 - Total number of sentences: 8033736
 - **Aggregated accuracy: 0.8684251013476171**
 
-### Stats per language
+## Stats per language
 |    | language_alpha3   | language             |   sentences_count |   precision |   recall |      tp |    fp |      tn |     fn |
 |---:|:------------------|:---------------------|------------------:|------------:|---------:|--------:|------:|--------:|-------:|
 |  1 | eng               | English              |           1479733 |       0.995 |    0.851 | 1258584 |  6790 | 6547213 | 221149 |

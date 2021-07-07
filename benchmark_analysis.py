@@ -64,11 +64,13 @@ def get_stats_per_language(results):
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Write aggregated results files.')
   parser.add_argument('--dataset_name', '-d', type=str, default='tatoeba-sentences-2021-06-05')
+  parser.add_argument('--timings_prefix', '-t', type=str, default='mbp_m1_')
   args = parser.parse_args()
 
   jinja_env = Environment(loader=FileSystemLoader("./templates"), autoescape=select_autoescape())
 
   dataset_name = args.dataset_name
+  timings_prefix = args.timings_prefix
   dataset = datasets.get(dataset_name)
 
   for benchmark_name in BENCHMARKS.keys():
@@ -87,7 +89,7 @@ if __name__ == "__main__":
     stats_per_language = get_stats_per_language(joined_results)
 
     # assemble the md file and write it
-    tmpl = jinja_env.get_template('model_results.md')
+    tmpl = jinja_env.get_template('classification_performance.md')
     rendered = tmpl.render(
       benchmark_name=benchmark_name,
       dataset_name=dataset_name,
@@ -95,10 +97,28 @@ if __name__ == "__main__":
       accuracy=aggregated_accuracy,
       stats_per_language=stats_per_language.to_markdown(floatfmt=".3f"),
     )
-    results_path = os.path.join('results', dataset_name, benchmark_name, 'results.md')
+    results_path = os.path.join('results', dataset_name, benchmark_name, 'classification_performance.md')
+    print(f"Dumping classification performance analysis to {results_path}")
     with open(results_path, 'w') as fd:
       fd.write(rendered)
 
+    times = np.load(os.path.join('results', dataset_name, benchmark_name, 'times.npy'))
+    tmpl = jinja_env.get_template('speed_performance.md')
+    rendered = tmpl.render(
+      benchmark_name=benchmark_name,
+      dataset_name=dataset_name,
+      latency_avg=np.mean(times) * 1000,
+      latency_std=np.std(times) * 1000,
+      latency_p50=np.quantile(times, [0.5])[0] * 1000,
+      latency_p90=np.quantile(times, [0.9])[0] * 1000,
+      latency_p95=np.quantile(times, [0.95])[0] * 1000,
+      latency_p99=np.quantile(times, [0.99])[0] * 1000,
+      throughput=10**9/np.mean(times),
+    )
+    results_path = os.path.join('results', dataset_name, benchmark_name, f'{timings_prefix}speed_performance.md')
+    print(f"Dumping latency/throughput analysis to {results_path}")
+    with open(results_path, 'w') as fd:
+      fd.write(rendered)
     # TODO
     # confusion_matrix = pd.pivot_table(joined_results, values='incorrect', index=['language', 'detected_lang_alpha3'], aggfunc=np.sum)
 
