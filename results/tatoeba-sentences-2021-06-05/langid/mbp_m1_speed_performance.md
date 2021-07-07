@@ -4,9 +4,9 @@
 1268.5839534203296 examples/s.
 
 ## Latency
-- Average: 788280505.4437437 ms/example
-- Standard deviation: 478077916.58786386
-- Median: 718000000.0 ms/example
-- 90th percentile: 1072000000.0 ms/example
-- 95th percentile: 1202000000.0 ms/example
-- 99th percentile: 1590000000.0 ms/example
+- Average: 0.7882805054437436 ms/example
+- Standard deviation: 0.47807791658786386
+- Median: 0.718 ms/example
+- 90th percentile: 1.072 ms/example
+- 95th percentile: 1.202 ms/example
+- 99th percentile: 1.59 ms/example

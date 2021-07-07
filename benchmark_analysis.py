@@ -107,12 +107,12 @@ if __name__ == "__main__":
     rendered = tmpl.render(
       benchmark_name=benchmark_name,
       dataset_name=dataset_name,
-      latency_avg=np.mean(times) * 1000,
-      latency_std=np.std(times) * 1000,
-      latency_p50=np.quantile(times, [0.5])[0] * 1000,
-      latency_p90=np.quantile(times, [0.9])[0] * 1000,
-      latency_p95=np.quantile(times, [0.95])[0] * 1000,
-      latency_p99=np.quantile(times, [0.99])[0] * 1000,
+      latency_avg=np.mean(times) / 10**6,
+      latency_std=np.std(times) / 10**6,
+      latency_p50=np.quantile(times, [0.5])[0] / 10**6,
+      latency_p90=np.quantile(times, [0.9])[0] / 10**6,
+      latency_p95=np.quantile(times, [0.95])[0] / 10**6,
+      latency_p99=np.quantile(times, [0.99])[0] / 10**6,
       throughput=10**9/np.mean(times),
     )
     results_path = os.path.join('results', dataset_name, benchmark_name, f'{timings_prefix}speed_performance.md')
