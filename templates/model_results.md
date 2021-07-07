@@ -1,14 +1,9 @@
 # Results for {{benchmark_name}} on {{dataset_name}}
 
-- [Dataset stats](#dataset-stats)
-- [Accuracy performance](#accuracy-performance)
-  - [Stats per language](#stats-per-language)
+## Performance
 
-## Dataset stats
-{{dataset_stats}}
-
-## Accuracy performance
-Aggregated accuracy: **{{accuracy}}**
+- Total number of sentences: {{dataset_len}}
+- **Aggregated accuracy: {{accuracy}}**
 
 ### Stats per language
 {{stats_per_language}}

@@ -12,35 +12,53 @@ from benchmarks import BENCHMARKS
 from langtools import get_iso_alpha3
 
 
-def read_results(dataset_name, benchmark_name='fasttext'):
+def read_results(dataset_name, benchmark_name='fasttext', lang_dtype='str'):
   results_path = os.path.join('results', dataset_name, benchmark_name, 'results.csv')
   results = pd.read_csv(results_path, sep=',', index_col=0, names=['detected_lang', 'detected_prob'])
   # langdetect returns nan for small number of rows. We'll just convert them to strings
   results['detected_lang'] = results['detected_lang'].astype(str)
-  results['iso_lang_code'] = results['detected_lang'].apply(lambda x: get_iso_alpha3(x.replace('__label__', '')))
+  results['detected_lang_alpha3'] = results['detected_lang'].apply(lambda x: get_iso_alpha3(x.replace('__label__', ''))).astype(lang_dtype)
   return results
 
 
-def join_results(dataset, results):
-  joined = dataset.join(results)
-  joined['correct'] = (joined['language'] == joined['iso_lang_code']).astype(int)
-  joined['incorrect'] = 1 - joined['correct']
-  return joined
+def accuracy(results_df):
+  correct = (results_df['language'] == results_df['detected_lang_alpha3']).astype(int)
+  return correct.mean()
 
 
 def get_stats_per_language(results):
-  accuracy_per_language = results.groupby('language').agg({'correct': [np.mean, 'count']}).reset_index()
-  accuracy_per_language.columns = ['language_iso639_3', 'accuracy', 'sentences']
+  langs = results['language'].unique().tolist()
+  class_metrics = {}
+  for lang in langs:
+    tp = (results['language'] == lang) & (results['detected_lang_alpha3'] == lang)
+    fp = (results['language'] != lang) & (results['detected_lang_alpha3'] == lang)
+    tn = (results['language'] != lang) & (results['detected_lang_alpha3'] != lang)
+    fn = (results['language'] == lang) & (results['detected_lang_alpha3'] != lang)
+    precision = tp.sum() / (tp.sum() + fp.sum())
+    recall = tp.sum() / (tp.sum() + fn.sum())
+    class_metrics[lang] = dict(
+      sentences_count=tp.sum()+fn.sum(),
+      precision=precision,
+      recall=recall,
+      tp=tp.sum(),
+      fp=fp.sum(),
+      tn=tn.sum(),
+      fn=fn.sum(),
+    )
 
-  accuracy_per_language['language'] = accuracy_per_language['language_iso639_3'].apply(dataset_analysis.get_language_name)
-  accuracy_per_language['sentences'] = accuracy_per_language['sentences'].astype(np.int32)
+  stats_per_language = pd.DataFrame.from_records(data=list(class_metrics.values()), index=list(class_metrics.keys()))
+  stats_per_language.index.name = 'language_alpha3'
+  stats_per_language = stats_per_language.reset_index()
 
-  # sort and set index
-  accuracy_per_language.sort_values(['sentences'], ascending=False, inplace=True)
-  accuracy_per_language.reset_index(inplace=True)
-  accuracy_per_language.index += 1
+  # assign the language
+  stats_per_language['language'] = stats_per_language['language_alpha3'].apply(dataset_analysis.get_language_name)
 
-  return accuracy_per_language[['language_iso639_3', 'language', 'sentences', 'accuracy']]
+  # sort by sentences count and set the index to be row number
+  stats_per_language.sort_values(['sentences_count'], ascending=False, inplace=True)
+  stats_per_language = stats_per_language.reset_index()
+  stats_per_language.index += 1
+
+  return stats_per_language[['language_alpha3', 'language', 'sentences_count', 'precision', 'recall', 'tp', 'fp', 'tn', 'fn']]
 
 
 if __name__ == "__main__":
@@ -60,14 +78,12 @@ if __name__ == "__main__":
 
     print(f"Analyzing {benchmark_name} results on {dataset_name}...")
 
-    results = read_results(dataset_name, benchmark_name)
+    results = read_results(dataset_name, benchmark_name, lang_dtype=dataset.dtypes['language'])
     supported_langs = BENCHMARKS[benchmark_name]['supported_languages']
     dataset_subset = datasets.get_supported_dataset_subset(dataset, supported_languages=supported_langs)
-    joined_results = join_results(dataset_subset, results)
+    joined_results = dataset_subset.join(results)
 
-    dataset_stats = dataset_analysis.get_stats_table(dataset_subset)
-
-    aggregated_accuracy = joined_results['correct'].mean()
+    aggregated_accuracy = accuracy(joined_results)
     stats_per_language = get_stats_per_language(joined_results)
 
     # assemble the md file and write it
@@ -75,7 +91,7 @@ if __name__ == "__main__":
     rendered = tmpl.render(
       benchmark_name=benchmark_name,
       dataset_name=dataset_name,
-      dataset_stats=dataset_stats.to_markdown(),
+      dataset_len=len(dataset_subset),
       accuracy=aggregated_accuracy,
       stats_per_language=stats_per_language.to_markdown(floatfmt=".3f"),
     )
@@ -84,7 +100,7 @@ if __name__ == "__main__":
       fd.write(rendered)
 
     # TODO
-    # confusion_matrix = pd.pivot_table(joined_results, values='incorrect', index=['language', 'iso_lang_code'], aggfunc=np.sum)
+    # confusion_matrix = pd.pivot_table(joined_results, values='incorrect', index=['language', 'detected_lang_alpha3'], aggfunc=np.sum)
 
     # confusion_matrix['incorrect'].quantile([i/100 for i in itertools.chain(range(0, 90, 10), range(90, 100))])
     # confusion_matrix[confusion_matrix['incorrect'] > 600]
