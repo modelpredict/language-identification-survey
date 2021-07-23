@@ -120,10 +120,3 @@ if __name__ == "__main__":
     print(f"Dumping latency/throughput analysis to {results_path}")
     with open(results_path, 'w') as fd:
       fd.write(rendered)
-    # TODO
-    # confusion_matrix = pd.pivot_table(joined_results, values='incorrect', index=['language', 'detected_lang_alpha3'], aggfunc=np.sum)
-
-    # confusion_matrix['incorrect'].quantile([i/100 for i in itertools.chain(range(0, 90, 10), range(90, 100))])
-    # confusion_matrix[confusion_matrix['incorrect'] > 600]
-    # fasttext_dataset['language'] == 'hrv'
-    # (fasttext_dataset['language'] == 'hrv').value_counts()
