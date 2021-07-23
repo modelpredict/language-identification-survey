@@ -1,7 +1,10 @@
 # Classification performance for gcld3 on tatoeba-sentences-2021-06-05
 
-- Total number of sentences: 8033736 (83.34%)
+- Dataset coverage (sentences in supported languages): 8033736 (83.34%)
 - **Aggregated accuracy: 0.8684251013476171**
+
+## Supported languages (107)
+afr (Afrikaans), amh (Amharic), ara (Arabic), bul (Bulgarian), bul (Bulgarian (Latin)), ben (Bangla), bos (Bosnian), cat (Catalan), ceb (Cebuano), cos (Corsican), ces (Czech), cym (Welsh), dan (Danish), deu (German), ell (Greek), ell (Greek (Latin)), eng (English), epo (Esperanto), spa (Spanish), est (Estonian), eus (Basque), fas (Persian), fin (Finnish), fil (Filipino), fra (French), fry (Western Frisian), gle (Irish), gla (Scottish Gaelic), glg (Galician), guj (Gujarati), hau (Hausa), haw (Hawaiian), hin (Hindi), hin (Hindi (Latin)), hmn (Hmong), hrv (Croatian), hat (Haitian Creole), hun (Hungarian), hye (Armenian), ind (Indonesian), ibo (Igbo), isl (Icelandic), ita (Italian), heb (Hebrew), jpn (Japanese), jpn (Japanese (Latin)), jav (Javanese), kat (Georgian), kaz (Kazakh), khm (Khmer), kan (Kannada), kor (Korean), kur (Kurdish), kir (Kyrgyz), lat (Latin), ltz (Luxembourgish), lao (Lao), lit (Lithuanian), lav (Latvian), mlg (Malagasy), mri (Maori), mkd (Macedonian), mal (Malayalam), mon (Mongolian), mar (Marathi), msa (Malay), mlt (Maltese), mya (Burmese), nep (Nepali), nld (Dutch), nob (Norwegian Bokmål), nya (Nyanja), pan (Punjabi), pol (Polish), pus (Pashto), por (Portuguese), ron (Romanian), rus (Russian), rus (Russian (Latin)), snd (Sindhi), sin (Sinhala), slk (Slovak), slv (Slovenian), smo (Samoan), sna (Shona), som (Somali), sqi (Albanian), srp (Serbian), sot (Southern Sotho), sun (Sundanese), swe (Swedish), swa (Swahili), tam (Tamil), tel (Telugu), tgk (Tajik), tha (Thai), tur (Turkish), ukr (Ukrainian), urd (Urdu), uzb (Uzbek), vie (Vietnamese), xho (Xhosa), yid (Yiddish), yor (Yoruba), zho (Chinese), zho (Chinese (Latin)), zul (Zulu)
 
 ## Stats per language
 |    | language_alpha3   | language             |   sentences_count |   precision |   recall |      tp |    fp |      tn |     fn |

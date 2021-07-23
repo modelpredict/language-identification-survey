@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 
 from jinja2 import Environment, select_autoescape, FileSystemLoader
+from langcodes import Language
 
 import datasets
 import dataset_analysis
@@ -80,6 +81,10 @@ if __name__ == "__main__":
 
     print(f"Analyzing {benchmark_name} results on {dataset_name}...")
 
+    supported_languages_raw = BENCHMARKS[benchmark_name]['supported_languages_raw']
+    supported_languages = [Language.get(lang) for lang in supported_languages_raw]
+    supported_languages_list_str = ", ".join(f"{lang.to_alpha3()} ({lang.display_name()})" for lang in supported_languages)
+
     results = read_results(dataset_name, benchmark_name, lang_dtype=dataset.dtypes['language'])
     supported_langs = BENCHMARKS[benchmark_name]['supported_languages']
     dataset_subset = datasets.get_supported_dataset_subset(dataset, supported_languages=supported_langs)
@@ -95,6 +100,8 @@ if __name__ == "__main__":
       dataset_name=dataset_name,
       dataset_len=len(dataset_subset),
       dataset_supported_pct="{:.2f}%".format(100. * len(dataset_subset) / len(dataset)),
+      supported_languages_count=len(supported_languages),
+      supported_languages_list_str=supported_languages_list_str,
       accuracy=aggregated_accuracy,
       stats_per_language=stats_per_language.to_markdown(floatfmt=".3f"),
     )

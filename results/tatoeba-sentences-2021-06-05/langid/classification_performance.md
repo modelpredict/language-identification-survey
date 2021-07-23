@@ -1,7 +1,10 @@
 # Classification performance for langid on tatoeba-sentences-2021-06-05
 
-- Total number of sentences: 8298609 (86.08%)
+- Dataset coverage (sentences in supported languages): 8298609 (86.08%)
 - **Aggregated accuracy: 0.8892028772532843**
+
+## Supported languages (97)
+afr (Afrikaans), amh (Amharic), arg (Aragonese), ara (Arabic), asm (Assamese), aze (Azerbaijani), bel (Belarusian), bul (Bulgarian), ben (Bangla), bre (Breton), bos (Bosnian), cat (Catalan), ces (Czech), cym (Welsh), dan (Danish), deu (German), dzo (Dzongkha), ell (Greek), eng (English), epo (Esperanto), spa (Spanish), est (Estonian), eus (Basque), fas (Persian), fin (Finnish), fao (Faroese), fra (French), gle (Irish), glg (Galician), guj (Gujarati), heb (Hebrew), hin (Hindi), hrv (Croatian), hat (Haitian Creole), hun (Hungarian), hye (Armenian), ind (Indonesian), isl (Icelandic), ita (Italian), jpn (Japanese), jav (Javanese), kat (Georgian), kaz (Kazakh), khm (Khmer), kan (Kannada), kor (Korean), kur (Kurdish), kir (Kyrgyz), lat (Latin), ltz (Luxembourgish), lao (Lao), lit (Lithuanian), lav (Latvian), mlg (Malagasy), mkd (Macedonian), mal (Malayalam), mon (Mongolian), mar (Marathi), msa (Malay), mlt (Maltese), nob (Norwegian Bokmål), nep (Nepali), nld (Dutch), nno (Norwegian Nynorsk), nob (Norwegian Bokmål), oci (Occitan), ori (Odia), pan (Punjabi), pol (Polish), pus (Pashto), por (Portuguese), que (Quechua), ron (Romanian), rus (Russian), kin (Kinyarwanda), sme (Northern Sami), sin (Sinhala), slk (Slovak), slv (Slovenian), sqi (Albanian), srp (Serbian), swe (Swedish), swa (Swahili), tam (Tamil), tel (Telugu), tha (Thai), fil (Filipino), tur (Turkish), uig (Uyghur), ukr (Ukrainian), urd (Urdu), vie (Vietnamese), vol (Volapük), wln (Walloon), xho (Xhosa), zho (Chinese), zul (Zulu)
 
 ## Stats per language
 |    | language_alpha3   | language              |   sentences_count |   precision |   recall |      tp |    fp |      tn |     fn |

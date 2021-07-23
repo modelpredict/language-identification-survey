@@ -1,7 +1,10 @@
 # Classification performance for langdetect on tatoeba-sentences-2021-06-05
 
-- Total number of sentences: 7515809 (77.96%)
+- Dataset coverage (sentences in supported languages): 7515809 (77.96%)
 - **Aggregated accuracy: 0.9216979835437542**
+
+## Supported languages (55)
+afr (Afrikaans), ara (Arabic), bul (Bulgarian), ben (Bangla), cat (Catalan), ces (Czech), cym (Welsh), dan (Danish), deu (German), ell (Greek), eng (English), spa (Spanish), est (Estonian), fas (Persian), fin (Finnish), fra (French), guj (Gujarati), heb (Hebrew), hin (Hindi), hrv (Croatian), hun (Hungarian), ind (Indonesian), ita (Italian), jpn (Japanese), kan (Kannada), kor (Korean), lit (Lithuanian), lav (Latvian), mkd (Macedonian), mal (Malayalam), mar (Marathi), nep (Nepali), nld (Dutch), nob (Norwegian Bokmål), pan (Punjabi), pol (Polish), por (Portuguese), ron (Romanian), rus (Russian), slk (Slovak), slv (Slovenian), som (Somali), sqi (Albanian), swe (Swedish), swa (Swahili), tam (Tamil), tel (Telugu), tha (Thai), fil (Filipino), tur (Turkish), ukr (Ukrainian), urd (Urdu), vie (Vietnamese), zho (Chinese (Simplified, China)), zho (Chinese (Traditional, Taiwan))
 
 ## Stats per language
 |    | language_alpha3   | language             |   sentences_count |   precision |   recall |      tp |    fp |      tn |    fn |
