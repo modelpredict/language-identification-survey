@@ -1,6 +1,6 @@
 # Classification performance for langid on tatoeba-sentences-2021-06-05
 
-- Total number of sentences: 8298609
+- Total number of sentences: 8298609 (86.08%)
 - **Aggregated accuracy: 0.8892028772532843**
 
 ## Stats per language

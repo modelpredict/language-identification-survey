@@ -94,6 +94,7 @@ if __name__ == "__main__":
       benchmark_name=benchmark_name,
       dataset_name=dataset_name,
       dataset_len=len(dataset_subset),
+      dataset_supported_pct="{:.2f}%".format(100. * len(dataset_subset) / len(dataset)),
       accuracy=aggregated_accuracy,
       stats_per_language=stats_per_language.to_markdown(floatfmt=".3f"),
     )
