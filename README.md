@@ -3,7 +3,12 @@ Live survey of off-the-shelf language identification tools for python
 
 ## Reproducing benchmark
 
-### 1. Run the language inference for benchmarks
+### 1. Download the dataset
+```bash
+./datasets/tatoeba-sentences-2021-06-05/download
+```
+
+### 2. Run the language inference for benchmarks
 
 Available benchmarks:
 - fasttext
@@ -21,10 +26,10 @@ python run.py <benchmark_name>
 In docker:
 ```bash
 docker build -t bench .
-docker run -v `pwd`:/src -t -i python /src/run.py <benchmark_name>
+docker run -v `pwd`:/src -t -i bench python /src/run.py <benchmark_name>
 ```
 
-### 2. Generate results markdown files
+### 3. Generate results markdown files
 ```bash
 python benchmark_analysis.py
 ```
