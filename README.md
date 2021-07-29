@@ -29,7 +29,8 @@ docker build -t bench .
 docker run -v `pwd`:/src -t -i bench python /src/run.py <benchmark_name>
 ```
 
-### 3. Generate results markdown files
+### 3. Run analysis
 ```bash
-python benchmark_analysis.py
+python analyze.py --correctness
+python analyze.py --timings
 ```
