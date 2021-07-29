@@ -65,7 +65,9 @@ def get_stats_per_language(results):
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Write aggregated results files.')
   parser.add_argument('--dataset_name', '-d', type=str, default='tatoeba-sentences-2021-06-05')
-  parser.add_argument('--timings_prefix', '-t', type=str, default='mbp_m1_')
+  parser.add_argument('--timings_prefix', '-t', type=str, default='', help='Prefix of the times.npy file')
+  parser.add_argument("--timings", type=bool, nargs='?', const=True, default=False, help='Analyze timings')
+  parser.add_argument("--correctness", type=bool, nargs='?', const=True, default=False, help='Analyze correctness')
   args = parser.parse_args()
 
   jinja_env = Environment(loader=FileSystemLoader("./templates"), autoescape=select_autoescape())
@@ -79,51 +81,53 @@ if __name__ == "__main__":
     if not benchmark_results_path.exists():
       print(f"Skipping {benchmark_name}. Results files not found on {benchmark_results_path}")
 
-    print(f"Analyzing {benchmark_name} results on {dataset_name}...")
+    if args.correctness:
+      print(f"Analyzing {benchmark_name} results on {dataset_name}...")
 
-    supported_languages_raw = BENCHMARKS[benchmark_name]['supported_languages_raw']
-    supported_languages = [Language.get(lang) for lang in supported_languages_raw]
-    supported_languages_list_str = ", ".join(f"{lang.to_alpha3()} ({lang.display_name()})" for lang in supported_languages)
+      supported_languages_raw = BENCHMARKS[benchmark_name]['supported_languages_raw']
+      supported_languages = [Language.get(lang) for lang in supported_languages_raw]
+      supported_languages_list_str = ", ".join(f"{lang.to_alpha3()} ({lang.display_name()})" for lang in supported_languages)
 
-    results = read_results(dataset_name, benchmark_name, lang_dtype=dataset.dtypes['language'])
-    supported_langs = BENCHMARKS[benchmark_name]['supported_languages']
-    dataset_subset = datasets.get_supported_dataset_subset(dataset, supported_languages=supported_langs)
-    joined_results = dataset_subset.join(results)
+      results = read_results(dataset_name, benchmark_name, lang_dtype=dataset.dtypes['language'])
+      supported_langs = BENCHMARKS[benchmark_name]['supported_languages']
+      dataset_subset = datasets.get_supported_dataset_subset(dataset, supported_languages=supported_langs)
+      joined_results = dataset_subset.join(results)
 
-    aggregated_accuracy = accuracy(joined_results)
-    stats_per_language = get_stats_per_language(joined_results)
+      aggregated_accuracy = accuracy(joined_results)
+      stats_per_language = get_stats_per_language(joined_results)
 
-    # assemble the md file and write it
-    tmpl = jinja_env.get_template('classification_performance.md')
-    rendered = tmpl.render(
-      benchmark_name=benchmark_name,
-      dataset_name=dataset_name,
-      dataset_len=len(dataset_subset),
-      dataset_supported_pct="{:.2f}%".format(100. * len(dataset_subset) / len(dataset)),
-      supported_languages_count=len(supported_languages),
-      supported_languages_list_str=supported_languages_list_str,
-      accuracy=aggregated_accuracy,
-      stats_per_language=stats_per_language.to_markdown(floatfmt=".3f"),
-    )
-    results_path = os.path.join('results', dataset_name, benchmark_name, 'classification_performance.md')
-    print(f"Dumping classification performance analysis to {results_path}")
-    with open(results_path, 'w') as fd:
-      fd.write(rendered)
+      # assemble the md file and write it
+      tmpl = jinja_env.get_template('classification_performance.md')
+      rendered = tmpl.render(
+        benchmark_name=benchmark_name,
+        dataset_name=dataset_name,
+        dataset_len=len(dataset_subset),
+        dataset_supported_pct="{:.2f}%".format(100. * len(dataset_subset) / len(dataset)),
+        supported_languages_count=len(supported_languages),
+        supported_languages_list_str=supported_languages_list_str,
+        accuracy=aggregated_accuracy,
+        stats_per_language=stats_per_language.to_markdown(floatfmt=".3f"),
+      )
+      results_path = os.path.join('results', dataset_name, benchmark_name, 'classification_performance.md')
+      print(f"Dumping classification performance analysis to {results_path}")
+      with open(results_path, 'w') as fd:
+        fd.write(rendered)
 
-    times = np.load(os.path.join('results', dataset_name, benchmark_name, 'times.npy'))
-    tmpl = jinja_env.get_template('speed_performance.md')
-    rendered = tmpl.render(
-      benchmark_name=benchmark_name,
-      dataset_name=dataset_name,
-      latency_avg=np.mean(times) / 10**6,
-      latency_std=np.std(times) / 10**6,
-      latency_p50=np.quantile(times, [0.5])[0] / 10**6,
-      latency_p90=np.quantile(times, [0.9])[0] / 10**6,
-      latency_p95=np.quantile(times, [0.95])[0] / 10**6,
-      latency_p99=np.quantile(times, [0.99])[0] / 10**6,
-      throughput=10**9/np.mean(times),
-    )
-    results_path = os.path.join('results', dataset_name, benchmark_name, f'{timings_prefix}speed_performance.md')
-    print(f"Dumping latency/throughput analysis to {results_path}")
-    with open(results_path, 'w') as fd:
-      fd.write(rendered)
+    if args.timings:
+      times = np.load(os.path.join('results', dataset_name, benchmark_name, f'{timings_prefix}times.npy'))
+      tmpl = jinja_env.get_template('speed_performance.md')
+      rendered = tmpl.render(
+        benchmark_name=benchmark_name,
+        dataset_name=dataset_name,
+        latency_avg=np.mean(times) / 10**6,
+        latency_std=np.std(times) / 10**6,
+        latency_p50=np.quantile(times, [0.5])[0] / 10**6,
+        latency_p90=np.quantile(times, [0.9])[0] / 10**6,
+        latency_p95=np.quantile(times, [0.95])[0] / 10**6,
+        latency_p99=np.quantile(times, [0.99])[0] / 10**6,
+        throughput=10**9/np.mean(times),
+      )
+      results_path = os.path.join('results', dataset_name, benchmark_name, f'{timings_prefix}speed_performance.md')
+      print(f"Dumping latency/throughput analysis to {results_path}")
+      with open(results_path, 'w') as fd:
+        fd.write(rendered)
