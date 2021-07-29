@@ -35,7 +35,11 @@ python analyze.py --correctness
 python analyze.py --timings
 ```
 
-### 4. Get memory usage for different libraries
+### 4. Get memory usage for different models
 ```bash
-python get_memory_usage.py
+python get_memory_usage.py <benchmark_names>
+# e.g. python get_memory_usage.py fasttext
+# e.g. python get_memory_usage.py fasttext-compressed
 ```
+
+It will print memory usage in MB (bytes/1024/1024).
