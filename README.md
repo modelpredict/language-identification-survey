@@ -34,3 +34,8 @@ docker run -v `pwd`:/src -t -i bench python /src/run.py <benchmark_name>
 python analyze.py --correctness
 python analyze.py --timings
 ```
+
+### 4. Get memory usage for different libraries
+```bash
+python get_memory_usage.py
+```
