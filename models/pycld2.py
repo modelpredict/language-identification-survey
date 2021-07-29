@@ -37,7 +37,8 @@ def run(dataset, elapsed):
     result = pycld2.detect(text)
     elapsed[i] = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - iter_start_time
 
-    lang[i] = result[2][0][1]
+    lang_label = result[2][0][1]
+    lang[i] = lang_label if lang_label != 'un' else None
     prob[i] = float('nan')
 
   return dict(lang=lang, prob=prob)
