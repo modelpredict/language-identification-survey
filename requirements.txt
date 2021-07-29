@@ -8,6 +8,7 @@ langdetect==1.0.9
 langid==1.1.6
 language-data==1.0
 pandas==1.2.4
+psutil==5.8.0
 pycld2==0.41
 pycountry==20.7.3
 scikit-learn==0.24.2
