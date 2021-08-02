@@ -41,7 +41,7 @@ curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?
 curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.no.gz" | gzip -d -c | head -n 100000 > no.txt
 curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.pl.gz" | gzip -d -c | head -n 100000 > pl.txt
 curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.pt.gz" | gzip -d -c | head -n 100000 > pt.txt
-curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.pt_br.gz" | gzip -d -c | head -n 100000 > pt_br.txt
+# curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.pt_br.gz" | gzip -d -c | head -n 100000 > pt_br.txt
 curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.ro.gz" | gzip -d -c | head -n 100000 > ro.txt
 curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.ru.gz" | gzip -d -c | head -n 100000 > ru.txt
 # curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.si.gz" | gzip -d -c | head -n 100000 > si.txt
@@ -61,4 +61,4 @@ curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?
 # curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.ze_en.gz" | gzip -d -c | head -n 100000 > ze_en.txt
 # curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.ze_zh.gz" | gzip -d -c | head -n 100000 > ze_zh.txt
 curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.zh_cn.gz" | gzip -d -c | head -n 100000 > zh_cn.txt
-curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.zh_tw.gz" | gzip -d -c | head -n 100000 > zh_tw.txt
+# curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.zh_tw.gz" | gzip -d -c | head -n 100000 > zh_tw.txt
