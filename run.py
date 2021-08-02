@@ -35,7 +35,7 @@ if __name__ == "__main__":
   parser.add_argument('benchmarks', nargs='+')
   parser.add_argument('--examples-lo', '-lo', type=int)
   parser.add_argument('--examples-hi', '-hi', type=int)
-  parser.add_argument('--dataset', type=str, default="tatoeba-sentences-2021-06-05")
+  parser.add_argument('--dataset', '-d', type=str, choices=datasets.names(), required=True)
   args = parser.parse_args()
 
   print(f'Loading dataset {args.dataset}...')

@@ -73,7 +73,7 @@ def get_stats_per_language(results):
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Write aggregated results files.')
-  parser.add_argument('--dataset', '-d', type=str, default='tatoeba-sentences-2021-06-05')
+  parser.add_argument('--dataset', '-d', type=str, choices=datasets.names(), required=True)
   parser.add_argument('--timings_prefix', '-t', type=str, default='', help='Prefix of the times.npy file')
   parser.add_argument("--timings", type=bool, nargs='?', const=True, default=False, help='Analyze timings')
   parser.add_argument("--correctness", type=bool, nargs='?', const=True, default=False, help='Analyze correctness')

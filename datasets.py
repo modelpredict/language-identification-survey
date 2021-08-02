@@ -6,7 +6,7 @@ import pandas as pd
 from langcodes import Language
 
 
-DATASETS = {}
+__DATASETS = {}
 
 
 def get_alpha3(lang):
@@ -18,15 +18,19 @@ def get_alpha3(lang):
 
 
 def dataset(load_fn):
-  DATASETS[load_fn.__name__] = load_fn
+  __DATASETS[load_fn.__name__] = load_fn
   return load_fn
 
 
 def get(name):
   name = name.replace('-', '_')
-  if name in DATASETS:
-    return DATASETS[name]()
+  if name in __DATASETS:
+    return __DATASETS[name]()
   raise ArgumentError(f"Unkown dataset {name}")
+
+
+def names():
+  return [name.replace('_', '-') for name in __DATASETS.keys()]
 
 
 @dataset

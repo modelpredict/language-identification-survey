@@ -1,17 +1,15 @@
-import iso639
+import argparse
 import os
+
 import datasets
-
-
-DATASET_NAME = "tatoeba-sentences-2021-06-05"
+from langcodes import Language
 
 
 def get_language_name(alpha3):
-    properties = ['part1','part2b', 'part2t', 'part3', 'part5','retired']
-    for prop in properties:
-        if alpha3 in getattr(iso639.languages, prop):
-            lang = getattr(iso639.languages, prop)[alpha3]
-            return lang.name
+  try:
+    return Language.get(alpha3).display_name()
+  except:
+    print(f"Failed to get name for language '{alpha3}'")
     return "--"
 
 
@@ -20,24 +18,27 @@ def get_stats_table(df):
   df['text_len'] = df['text'].str.len()
 
   # calculate stats (count, pct, mean(text_len)) per language, sorted by count DESC
-  counts = df.groupby('language').agg({'text_len': ['count', 'mean']}).reset_index()
-  counts.columns = ['language_iso639_3', 'sentences', 'mean_len']
+  counts = df.groupby('alpha3').agg({'text_len': ['count', 'mean']}).reset_index()
+  counts.columns = ['alpha3', 'sentences', 'mean_len']
   counts['dataset_percentage'] = (counts['sentences'] / counts['sentences'].sum() * 100).apply(lambda x: "{:.2f}%".format(x))
   counts.sort_values(['sentences'], ascending=False, inplace=True)
   counts.reset_index(inplace=True)
   counts.index += 1
 
   # assign language name
-  counts['language'] = counts['language_iso639_3'].apply(get_language_name)
-  return counts[['language_iso639_3', 'language', 'sentences', 'dataset_percentage', 'mean_len']]
+  counts['language'] = counts['alpha3'].apply(get_language_name)
+  return counts[['alpha3', 'language', 'sentences', 'dataset_percentage', 'mean_len']]
 
 
 if __name__ == "__main__":
-  # Hardcoded dataset name
-  print(f"Dumping stats for dataset {DATASET_NAME}")
+  parser = argparse.ArgumentParser(description='Write aggregated results files.')
+  parser.add_argument('--dataset', '-d', type=str, choices=datasets.names(), required=True)
+  args = parser.parse_args()
 
-  ds = datasets.tatoeba_sentences_2021_06_05()
+  print(f"Dumping stats for dataset {args.dataset}")
+
+  ds = datasets.get(args.dataset)
   stats_df = get_stats_table(ds)
 
-  with open(os.path.join('datasets', DATASET_NAME, 'stats.md'), 'w') as fd:
+  with open(os.path.join('datasets', args.dataset, 'stats.md'), 'w') as fd:
     stats_df.to_markdown(fd, index=True)
