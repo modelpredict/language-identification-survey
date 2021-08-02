@@ -32,7 +32,7 @@ if __name__ == "__main__":
   # os.chdir(os.path.dirname(__file__))
 
   parser = argparse.ArgumentParser(description='Run benchmark for given model.')
-  parser.add_argument('benchmarks', nargs='+')
+  parser.add_argument('benchmarks', nargs='+', choices=list(BENCHMARKS.keys()))
   parser.add_argument('--examples-lo', '-lo', type=int)
   parser.add_argument('--examples-hi', '-hi', type=int)
   parser.add_argument('--dataset', '-d', type=str, choices=datasets.names(), required=True)
