@@ -68,7 +68,7 @@ def get_stats_per_language(results):
   stats_per_language = stats_per_language.reset_index()
   stats_per_language.index += 1
 
-  return stats_per_language[['language_alpha3', 'language', 'sentences_count', 'precision', 'recall', 'tp', 'fp', 'tn', 'fn']]
+  return stats_per_language[['language_alpha3', 'language', 'sentences_count', 'precision', 'recall', 'f1', 'tp', 'fp', 'tn', 'fn']]
 
 
 if __name__ == "__main__":
