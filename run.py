@@ -46,7 +46,7 @@ if __name__ == "__main__":
     print()
     print(f'Loaded benchmark {benchmark_name}')
 
-    supported_dataset = datasets.get_supported_dataset_subset(dataset, benchmark['supported_languages'])
+    supported_dataset = datasets.get_supported_dataset_subset(dataset, benchmark['supported_languages_alpha3'])
     lo = args.examples_lo or 0
     hi = args.examples_hi or len(supported_dataset)
     print(f'Benchmark supports {len(supported_dataset)}/{len(dataset)} ({100*len(supported_dataset)/len(dataset)}%) items')

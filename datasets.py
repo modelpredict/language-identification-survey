@@ -56,12 +56,12 @@ def open_subtitles_v2018_100k_per_lang():
       text=sentences,
       language=language,
     )
-    df = pd.DataFrame(data=data)
-    df['language'] = df['language'].astype("category")
-    df['alpha3'] = df['language'].apply(get_alpha3).astype("category")
-    dfs.append(df)
+    dfs.append(pd.DataFrame(data=data))
 
-  return pd.concat(dfs)
+  big_df = pd.concat(dfs)
+  big_df['language'] = big_df['language'].astype("category")
+  big_df['alpha3'] = big_df['language'].apply(get_alpha3).astype("category")
+  return big_df
 
 
 def get_supported_dataset_subset(dataset, supported_languages):

@@ -24,7 +24,7 @@ def read_results(dataset_name, benchmark_name='fasttext', lang_dtype='str'):
   results_path = os.path.join('results', dataset_name, benchmark_name, 'results.csv')
   results = pd.read_csv(results_path, sep=',', index_col=0, names=['detected_lang', 'detected_prob'])
   # langdetect/pycld2 returns nan for small number of rows. We'll just convert them to strings
-  results['detected_lang'] = results['detected_lang'].astype(str)
+  results['detected_lang'] = results['detected_lang'].astype(str).astype("category")
   results['detected_lang_alpha3'] = results['detected_lang'].apply(lambda x: get_alpha3(x.replace('__label__', ''))).astype(lang_dtype)
   return results
 
@@ -93,15 +93,19 @@ if __name__ == "__main__":
     if args.correctness:
       print(f"Analyzing {benchmark_name} results on {dataset_name}...")
 
-      supported_languages = BENCHMARKS[benchmark_name]['supported_languages']
+      supported_languages = [Language.get(lang) for lang in BENCHMARKS[benchmark_name]['supported_languages_alpha3']]
       supported_languages_list_str = ", ".join(f"{lang.to_alpha3()} ({lang.display_name()})" for lang in supported_languages)
 
+      print(f"Reading results...")
       results = read_results(dataset_name, benchmark_name, lang_dtype=dataset.dtypes['alpha3'])
-      supported_langs = BENCHMARKS[benchmark_name]['supported_languages']
+      supported_langs = BENCHMARKS[benchmark_name]['supported_languages_alpha3']
       dataset_subset = datasets.get_supported_dataset_subset(dataset, supported_languages=supported_langs)
+      print(f"Merging with dataset...")
       joined_results = dataset_subset.join(results)
 
+      print(f"Calculating accuracy...")
       aggregated_accuracy = accuracy(joined_results)
+      print(f"Calculating metrics per language...")
       stats_per_language = get_stats_per_language(joined_results)
 
       # assemble the md file and write it
