@@ -1,101 +1,104 @@
 # Classification performance for gcld3 on tatoeba-sentences-2021-06-05
 
-- Dataset coverage (sentences in supported languages): 8033736 (83.34%)
-- **Aggregated accuracy: 0.8684251013476171**
+- Dataset coverage (sentences in supported languages): 8261834 (85.70%)
+- **Aggregated accuracy: 0.8711048902701265**
 
 ## Supported languages (107)
-afr (Afrikaans), amh (Amharic), ara (Arabic), bul (Bulgarian), bul (Bulgarian (Latin)), ben (Bangla), bos (Bosnian), cat (Catalan), ceb (Cebuano), cos (Corsican), ces (Czech), cym (Welsh), dan (Danish), deu (German), ell (Greek), ell (Greek (Latin)), eng (English), epo (Esperanto), spa (Spanish), est (Estonian), eus (Basque), fas (Persian), fin (Finnish), fil (Filipino), fra (French), fry (Western Frisian), gle (Irish), gla (Scottish Gaelic), glg (Galician), guj (Gujarati), hau (Hausa), haw (Hawaiian), hin (Hindi), hin (Hindi (Latin)), hmn (Hmong), hrv (Croatian), hat (Haitian Creole), hun (Hungarian), hye (Armenian), ind (Indonesian), ibo (Igbo), isl (Icelandic), ita (Italian), heb (Hebrew), jpn (Japanese), jpn (Japanese (Latin)), jav (Javanese), kat (Georgian), kaz (Kazakh), khm (Khmer), kan (Kannada), kor (Korean), kur (Kurdish), kir (Kyrgyz), lat (Latin), ltz (Luxembourgish), lao (Lao), lit (Lithuanian), lav (Latvian), mlg (Malagasy), mri (Maori), mkd (Macedonian), mal (Malayalam), mon (Mongolian), mar (Marathi), msa (Malay), mlt (Maltese), mya (Burmese), nep (Nepali), nld (Dutch), nob (Norwegian Bokmål), nya (Nyanja), pan (Punjabi), pol (Polish), pus (Pashto), por (Portuguese), ron (Romanian), rus (Russian), rus (Russian (Latin)), snd (Sindhi), sin (Sinhala), slk (Slovak), slv (Slovenian), smo (Samoan), sna (Shona), som (Somali), sqi (Albanian), srp (Serbian), sot (Southern Sotho), sun (Sundanese), swe (Swedish), swa (Swahili), tam (Tamil), tel (Telugu), tgk (Tajik), tha (Thai), tur (Turkish), ukr (Ukrainian), urd (Urdu), uzb (Uzbek), vie (Vietnamese), xho (Xhosa), yid (Yiddish), yor (Yoruba), zho (Chinese), zho (Chinese (Latin)), zul (Zulu)
+afr (Afrikaans), amh (Amharic), ara (Arabic), bul (Bulgarian), bul (Bulgarian), ben (Bangla), bos (Bosnian), cat (Catalan), ceb (Cebuano), cos (Corsican), ces (Czech), cym (Welsh), dan (Danish), deu (German), ell (Greek), ell (Greek), eng (English), epo (Esperanto), spa (Spanish), est (Estonian), eus (Basque), fas (Persian), fin (Finnish), fil (Filipino), fra (French), fry (Western Frisian), gle (Irish), gla (Scottish Gaelic), glg (Galician), guj (Gujarati), hau (Hausa), haw (Hawaiian), hin (Hindi), hin (Hindi), hmn (Hmong), hrv (Croatian), hat (Haitian Creole), hun (Hungarian), hye (Armenian), ind (Indonesian), ibo (Igbo), isl (Icelandic), ita (Italian), heb (Hebrew), jpn (Japanese), jpn (Japanese), jav (Javanese), kat (Georgian), kaz (Kazakh), khm (Khmer), kan (Kannada), kor (Korean), kur (Kurdish), kir (Kyrgyz), lat (Latin), ltz (Luxembourgish), lao (Lao), lit (Lithuanian), lav (Latvian), mlg (Malagasy), mri (Maori), mkd (Macedonian), mal (Malayalam), mon (Mongolian), mar (Marathi), msa (Malay), mlt (Maltese), mya (Burmese), nep (Nepali), nld (Dutch), nob (Norwegian Bokmål), nya (Nyanja), pan (Punjabi), pol (Polish), pus (Pashto), por (Portuguese), ron (Romanian), rus (Russian), rus (Russian), snd (Sindhi), sin (Sinhala), slk (Slovak), slv (Slovenian), smo (Samoan), sna (Shona), som (Somali), sqi (Albanian), srp (Serbian), sot (Southern Sotho), sun (Sundanese), swe (Swedish), swa (Swahili), tam (Tamil), tel (Telugu), tgk (Tajik), tha (Thai), tur (Turkish), ukr (Ukrainian), urd (Urdu), uzb (Uzbek), vie (Vietnamese), xho (Xhosa), yid (Yiddish), yor (Yoruba), zho (Chinese), zho (Chinese), zul (Zulu)
 
 ## Stats per language
 |    | language_alpha3   | language             |   sentences_count |   precision |   recall |      tp |    fp |      tn |     fn |
 |---:|:------------------|:---------------------|------------------:|------------:|---------:|--------:|------:|--------:|-------:|
-|  1 | eng               | English              |           1479733 |       0.995 |    0.851 | 1258584 |  6790 | 6547213 | 221149 |
-|  2 | rus               | Russian              |            849653 |       0.988 |    0.858 |  729146 |  8935 | 7175148 | 120507 |
-|  3 | ita               | Italian              |            787053 |       0.970 |    0.821 |  646316 | 19985 | 7226698 | 140737 |
-|  4 | tur               | Turkish              |            709573 |       0.993 |    0.894 |  634612 |  4554 | 7319609 |  74961 |
-|  5 | epo               | Esperanto            |            659632 |       0.963 |    0.922 |  608152 | 23676 | 7350428 |  51480 |
-|  6 | deu               | German               |            553727 |       0.977 |    0.933 |  516822 | 12302 | 7467707 |  36905 |
-|  7 | fra               | French               |            466192 |       0.973 |    0.860 |  400941 | 11058 | 7556486 |  65251 |
-|  8 | por               | Portuguese           |            385737 |       0.910 |    0.885 |  341427 | 33844 | 7614155 |  44310 |
-|  9 | spa               | Spanish              |            338781 |       0.908 |    0.782 |  264941 | 26845 | 7668110 |  73840 |
-| 10 | hun               | Hungarian            |            323048 |       0.968 |    0.895 |  289189 |  9642 | 7701046 |  33859 |
-| 11 | jpn               | Japanese             |            208761 |       0.991 |    0.999 |  208552 |  1855 | 7823120 |    209 |
-| 12 | ukr               | Ukrainian            |            171674 |       0.800 |    0.889 |  152579 | 38083 | 7823979 |  19095 |
-| 13 | nld               | Dutch                |            144340 |       0.876 |    0.854 |  123199 | 17474 | 7871922 |  21141 |
-| 14 | fin               | Finnish              |            128011 |       0.941 |    0.902 |  115404 |  7189 | 7898536 |  12607 |
-| 15 | pol               | Polish               |            109662 |       0.915 |    0.931 |  102084 |  9474 | 7914600 |   7578 |
-| 16 | mkd               | Macedonian           |             77938 |       0.862 |    0.741 |   57730 |  9228 | 7946570 |  20208 |
-| 17 | mar               | Marathi              |             64126 |       0.989 |    0.911 |   58406 |   650 | 7968960 |   5720 |
-| 18 | lit               | Lithuanian           |             59659 |       0.841 |    0.883 |   52661 |  9935 | 7964142 |   6998 |
-| 19 | ces               | Czech                |             57030 |       0.881 |    0.813 |   46341 |  6250 | 7970456 |  10689 |
-| 20 | dan               | Danish               |             49399 |       0.668 |    0.746 |   36848 | 18325 | 7966012 |  12551 |
-| 21 | srp               | Serbian              |             45176 |       0.317 |    0.449 |   20304 | 43760 | 7944800 |  24872 |
-| 22 | swe               | Swedish              |             41677 |       0.792 |    0.861 |   35870 |  9400 | 7982659 |   5807 |
-| 23 | lat               | Latin                |             39718 |       0.500 |    0.729 |   28963 | 28984 | 7965034 |  10755 |
-| 24 | ara               | Arabic               |             35991 |       0.999 |    0.911 |   32774 |    32 | 7997713 |   3217 |
-| 25 | ell               | Modern Greek (1453-) |             34071 |       0.999 |    1.000 |   34062 |    20 | 7999645 |      9 |
-| 26 | ron               | Romanian             |             24943 |       0.592 |    0.808 |   20164 | 13915 | 7994878 |   4779 |
-| 27 | bul               | Bulgarian            |             24503 |       0.376 |    0.844 |   20688 | 34288 | 7974945 |   3815 |
-| 28 | vie               | Vietnamese           |             19234 |       0.884 |    0.981 |   18870 |  2484 | 8012018 |    364 |
-| 29 | slk               | Slovak               |             14660 |       0.411 |    0.727 |   10664 | 15298 | 8003778 |   3996 |
-| 30 | ind               | Indonesian           |             14542 |       0.647 |    0.640 |    9304 |  5074 | 8014120 |   5238 |
-| 31 | hin               | Hindi                |             14230 |       0.760 |    0.880 |   12526 |  3947 | 8015559 |   1704 |
-| 32 | isl               | Icelandic            |             11091 |       0.524 |    0.945 |   10484 |  9508 | 8013137 |    607 |
-| 33 | cat               | Catalan              |              7971 |       0.176 |    0.818 |    6520 | 30446 | 7995319 |   1451 |
-| 34 | kor               | Korean               |              7570 |       0.915 |    0.996 |    7536 |   699 | 8025467 |     34 |
-| 35 | yid               | Yiddish              |              6895 |       0.992 |    0.944 |    6512 |    51 | 8026790 |    383 |
-| 36 | eus               | Basque               |              6166 |       0.439 |    0.861 |    5306 |  6782 | 8020788 |    860 |
-| 37 | kat               | Georgian             |              5732 |       1.000 |    0.998 |    5720 |     2 | 8028002 |     12 |
-| 38 | hrv               | Croatian             |              5204 |       0.139 |    0.447 |    2324 | 14382 | 8014150 |   2880 |
-| 39 | ben               | Bengali              |              4714 |       1.000 |    0.998 |    4704 |     0 | 8029022 |     10 |
-| 40 | glg               | Galician             |              4613 |       0.064 |    0.774 |    3569 | 52173 | 7976950 |   1044 |
-| 41 | afr               | Afrikaans            |              4031 |       0.145 |    0.865 |    3485 | 20581 | 8009124 |    546 |
-| 42 | kaz               | Kazakh               |              3685 |       0.404 |    0.932 |    3434 |  5057 | 8024994 |    251 |
-| 43 | est               | Estonian             |              3637 |       0.165 |    0.796 |    2894 | 14606 | 8015493 |    743 |
-| 44 | tha               | Thai                 |              3528 |       0.995 |    0.998 |    3522 |    18 | 8030190 |      6 |
-| 45 | mon               | Mongolian            |              2757 |       0.416 |    0.955 |    2633 |  3698 | 8027281 |    124 |
-| 46 | sqi               | Albanian             |              2526 |       0.290 |    0.865 |    2184 |  5346 | 8025864 |    342 |
-| 47 | gle               | Irish                |              2389 |       0.175 |    0.911 |    2177 | 10233 | 8021114 |    212 |
-| 48 | hye               | Armenian             |              2248 |       0.995 |    0.998 |    2243 |    12 | 8031476 |      5 |
-| 49 | urd               | Urdu                 |              2008 |       0.882 |    0.961 |    1930 |   258 | 8031470 |     78 |
-| 50 | khm               | Central Khmer        |              1511 |       1.000 |    0.985 |    1489 |     0 | 8032225 |     22 |
-| 51 | ceb               | Cebuano              |              1478 |       0.187 |    0.571 |     844 |  3674 | 8028584 |    634 |
-| 52 | cym               | Welsh                |              1344 |       0.103 |    0.824 |    1108 |  9649 | 8022743 |    236 |
-| 53 | slv               | Slovenian            |              1093 |       0.048 |    0.724 |     791 | 15666 | 8016977 |    302 |
-| 54 | gla               | Scottish Gaelic      |              1033 |       0.090 |    0.867 |     896 |  9047 | 8023656 |    137 |
-| 55 | uzb               | Uzbek                |               855 |       0.093 |    0.581 |     497 |  4871 | 8028010 |    358 |
-| 56 | mal               | Malayalam            |               827 |       1.000 |    1.000 |     827 |     0 | 8032909 |      0 |
-| 57 | ltz               | Luxembourgish        |               805 |       0.032 |    0.867 |     698 | 21449 | 8011482 |    107 |
-| 58 | jav               | Javanese             |               615 |       0.031 |    0.361 |     222 |  6864 | 8026257 |    393 |
-| 59 | bos               | Bosnian              |               567 |       0.012 |    0.388 |     220 | 18752 | 8014417 |    347 |
-| 60 | mya               | Burmese              |               433 |       1.000 |    1.000 |     433 |     0 | 8033303 |      0 |
-| 61 | mri               | Maori                |               388 |       0.040 |    0.711 |     276 |  6574 | 8026774 |    112 |
-| 62 | fry               | Western Frisian      |               355 |       0.012 |    0.738 |     262 | 20956 | 8012425 |     93 |
-| 63 | tam               | Tamil                |               334 |       1.000 |    1.000 |     334 |     0 | 8033402 |      0 |
-| 64 | kir               | Kirghiz              |               254 |       0.027 |    0.878 |     223 |  7966 | 8025516 |     31 |
-| 65 | tel               | Telugu               |               254 |       1.000 |    1.000 |     254 |     0 | 8033482 |      0 |
-| 66 | xho               | Xhosa                |               252 |       0.039 |    0.683 |     172 |  4204 | 8029280 |     80 |
-| 67 | lao               | Lao                  |               219 |       1.000 |    1.000 |     219 |     0 | 8033517 |      0 |
-| 68 | amh               | Amharic              |               211 |       1.000 |    0.991 |     209 |     0 | 8033525 |      2 |
-| 69 | mlt               | Maltese              |               208 |       0.013 |    0.817 |     170 | 12481 | 8021047 |     38 |
-| 70 | pan               | Panjabi              |               196 |       1.000 |    0.995 |     195 |     0 | 8033540 |      1 |
-| 71 | kan               | Kannada              |               176 |       1.000 |    1.000 |     176 |     0 | 8033560 |      0 |
-| 72 | guj               | Gujarati             |               168 |       1.000 |    0.982 |     165 |     0 | 8033568 |      3 |
-| 73 | haw               | Hawaiian             |               155 |       0.010 |    0.839 |     130 | 12536 | 8021045 |     25 |
-| 74 | som               | Somali               |                80 |       0.021 |    0.912 |      73 |  3482 | 8030174 |      7 |
-| 75 | zul               | Zulu                 |                77 |       0.007 |    0.753 |      58 |  7811 | 8025848 |     19 |
-| 76 | smo               | Samoan               |                76 |       0.008 |    0.763 |      58 |  7262 | 8026398 |     18 |
-| 77 | hat               | Haitian              |                64 |       0.004 |    0.797 |      51 | 13228 | 8020444 |     13 |
-| 78 | tgk               | Tajik                |                63 |       0.008 |    0.889 |      56 |  7342 | 8026331 |      7 |
-| 79 | hau               | Hausa                |                60 |       0.006 |    0.800 |      48 |  7613 | 8026063 |     12 |
-| 80 | mlg               | Malagasy             |                59 |       0.003 |    0.831 |      49 | 14874 | 8018803 |     10 |
-| 81 | sin               | Sinhala              |                45 |       1.000 |    1.000 |      45 |     0 | 8033691 |      0 |
-| 82 | pus               | Pushto               |                44 |       0.098 |    0.864 |      38 |   350 | 8033342 |      6 |
-| 83 | sna               | Shona                |                42 |       0.006 |    0.667 |      28 |  4966 | 8028728 |     14 |
-| 84 | yor               | Yoruba               |                37 |       0.001 |    0.108 |       4 |  3748 | 8029951 |     33 |
-| 85 | ibo               | Igbo                 |                32 |       0.002 |    0.688 |      22 | 10769 | 8022935 |     10 |
-| 86 | sun               | Sundanese            |                31 |       0.003 |    0.548 |      17 |  5288 | 8028417 |     14 |
-| 87 | nya               | Nyanja               |                24 |       0.010 |    0.833 |      20 |  2005 | 8031707 |      4 |
-| 88 | cos               | Corsican             |                24 |       0.000 |    0.583 |      14 | 35266 | 7998446 |     10 |
-| 89 | snd               | Sindhi               |                 6 |       0.003 |    0.833 |       5 |  1440 | 8032290 |      1 |
-| 90 | sot               | Southern Sotho       |                 2 |       0.001 |    1.000 |       2 |  3100 | 8030634 |      0 |
+|  1 | eng               | English              |           1479733 |       0.995 |    0.851 | 1258584 |  6819 | 6775282 | 221149 |
+|  2 | rus               | Russian              |            849653 |       0.974 |    0.858 |  729212 | 19236 | 7392945 | 120441 |
+|  3 | ita               | Italian              |            787053 |       0.970 |    0.821 |  646316 | 20005 | 7454776 | 140737 |
+|  4 | tur               | Turkish              |            709573 |       0.993 |    0.894 |  634612 |  4617 | 7547644 |  74961 |
+|  5 | epo               | Esperanto            |            659632 |       0.963 |    0.922 |  608152 | 23690 | 7578512 |  51480 |
+|  6 | deu               | German               |            553727 |       0.977 |    0.933 |  516822 | 12347 | 7695760 |  36905 |
+|  7 | fra               | French               |            466192 |       0.973 |    0.860 |  400941 | 11073 | 7784569 |  65251 |
+|  8 | por               | Portuguese           |            385737 |       0.910 |    0.885 |  341427 | 33858 | 7842239 |  44310 |
+|  9 | spa               | Spanish              |            338781 |       0.908 |    0.782 |  264941 | 26864 | 7896189 |  73840 |
+| 10 | hun               | Hungarian            |            323048 |       0.968 |    0.895 |  289189 |  9667 | 7929119 |  33859 |
+| 11 | jpn               | Japanese             |            208761 |       0.978 |    0.999 |  208552 |  4759 | 8048314 |    209 |
+| 12 | heb               | Hebrew               |            197226 |       0.998 |    0.991 |  195374 |   409 | 8064199 |   1852 |
+| 13 | ukr               | Ukrainian            |            171674 |       0.800 |    0.889 |  152579 | 38095 | 8052065 |  19095 |
+| 14 | nld               | Dutch                |            144340 |       0.876 |    0.854 |  123199 | 17516 | 8099978 |  21141 |
+| 15 | fin               | Finnish              |            128011 |       0.941 |    0.902 |  115404 |  7235 | 8126588 |  12607 |
+| 16 | pol               | Polish               |            109662 |       0.915 |    0.931 |  102084 |  9477 | 8142695 |   7578 |
+| 17 | mkd               | Macedonian           |             77938 |       0.862 |    0.741 |   57730 |  9232 | 8174664 |  20208 |
+| 18 | mar               | Marathi              |             64126 |       0.989 |    0.911 |   58406 |   654 | 8197054 |   5720 |
+| 19 | lit               | Lithuanian           |             59659 |       0.841 |    0.883 |   52661 |  9950 | 8192225 |   6998 |
+| 20 | ces               | Czech                |             57030 |       0.881 |    0.813 |   46341 |  6282 | 8198522 |  10689 |
+| 21 | dan               | Danish               |             49399 |       0.652 |    0.746 |   36848 | 19626 | 8192809 |  12551 |
+| 22 | srp               | Serbian              |             45176 |       0.317 |    0.449 |   20304 | 43763 | 8172895 |  24872 |
+| 23 | swe               | Swedish              |             41677 |       0.786 |    0.861 |   35870 |  9753 | 8210404 |   5807 |
+| 24 | lat               | Latin                |             39718 |       0.500 |    0.729 |   28963 | 28998 | 8193118 |  10755 |
+| 25 | ara               | Arabic               |             35991 |       0.999 |    0.911 |   32774 |    32 | 8225811 |   3217 |
+| 26 | ell               | Modern Greek (1453-) |             34071 |       0.730 |    1.000 |   34062 | 12617 | 8215146 |      9 |
+| 27 | ron               | Romanian             |             24943 |       0.592 |    0.808 |   20164 | 13920 | 8222971 |   4779 |
+| 28 | bul               | Bulgarian            |             24503 |       0.318 |    0.844 |   20688 | 44456 | 8192875 |   3815 |
+| 29 | vie               | Vietnamese           |             19234 |       0.883 |    0.981 |   18870 |  2495 | 8240105 |    364 |
+| 30 | fil               | Filipino             |             16649 |       0.733 |    0.780 |   12994 |  4735 | 8240450 |   3655 |
+| 31 | slk               | Slovak               |             14660 |       0.411 |    0.727 |   10664 | 15304 | 8231870 |   3996 |
+| 32 | ind               | Indonesian           |             14542 |       0.642 |    0.640 |    9304 |  5180 | 8242112 |   5238 |
+| 33 | hin               | Hindi                |             14230 |       0.508 |    0.880 |   12527 | 12125 | 8235479 |   1703 |
+| 34 | nob               | Norwegian Bokmål     |             14223 |       0.285 |    0.829 |   11791 | 29626 | 8217985 |   2432 |
+| 35 | isl               | Icelandic            |             11091 |       0.523 |    0.945 |   10484 |  9560 | 8241183 |    607 |
+| 36 | cat               | Catalan              |              7971 |       0.176 |    0.818 |    6520 | 30461 | 8223402 |   1451 |
+| 37 | kor               | Korean               |              7570 |       0.915 |    0.996 |    7536 |   703 | 8253561 |     34 |
+| 38 | yid               | Yiddish              |              6895 |       0.790 |    0.944 |    6512 |  1728 | 8253211 |    383 |
+| 39 | eus               | Basque               |              6166 |       0.439 |    0.861 |    5306 |  6789 | 8248879 |    860 |
+| 40 | kat               | Georgian             |              5732 |       1.000 |    0.998 |    5720 |     2 | 8256100 |     12 |
+| 41 | hrv               | Croatian             |              5204 |       0.139 |    0.447 |    2324 | 14392 | 8242238 |   2880 |
+| 42 | ben               | Bengali              |              4714 |       1.000 |    0.998 |    4704 |     0 | 8257120 |     10 |
+| 43 | glg               | Galician             |              4613 |       0.064 |    0.774 |    3569 | 52237 | 8204984 |   1044 |
+| 44 | afr               | Afrikaans            |              4031 |       0.145 |    0.865 |    3485 | 20607 | 8237196 |    546 |
+| 45 | kaz               | Kazakh               |              3685 |       0.404 |    0.932 |    3434 |  5063 | 8253086 |    251 |
+| 46 | est               | Estonian             |              3637 |       0.165 |    0.796 |    2894 | 14623 | 8243574 |    743 |
+| 47 | tha               | Thai                 |              3528 |       0.995 |    0.998 |    3522 |    18 | 8258288 |      6 |
+| 48 | mon               | Mongolian            |              2757 |       0.415 |    0.955 |    2633 |  3712 | 8255365 |    124 |
+| 49 | sqi               | Albanian             |              2526 |       0.288 |    0.865 |    2184 |  5395 | 8253913 |    342 |
+| 50 | gle               | Irish                |              2389 |       0.175 |    0.911 |    2177 | 10238 | 8249207 |    212 |
+| 51 | hye               | Armenian             |              2248 |       0.994 |    0.998 |    2243 |    13 | 8259573 |      5 |
+| 52 | urd               | Urdu                 |              2008 |       0.882 |    0.961 |    1930 |   258 | 8259568 |     78 |
+| 53 | khm               | Central Khmer        |              1511 |       1.000 |    0.985 |    1489 |     0 | 8260323 |     22 |
+| 54 | ceb               | Cebuano              |              1478 |       0.148 |    0.571 |     844 |  4846 | 8255510 |    634 |
+| 55 | cym               | Welsh                |              1344 |       0.103 |    0.824 |    1108 |  9667 | 8250823 |    236 |
+| 56 | slv               | Slovenian            |              1093 |       0.048 |    0.724 |     791 | 15714 | 8245027 |    302 |
+| 57 | gla               | Scottish Gaelic      |              1033 |       0.090 |    0.867 |     896 |  9060 | 8251741 |    137 |
+| 58 | uzb               | Uzbek                |               855 |       0.091 |    0.581 |     497 |  4957 | 8256022 |    358 |
+| 59 | mal               | Malayalam            |               827 |       1.000 |    1.000 |     827 |     0 | 8261007 |      0 |
+| 60 | ltz               | Luxembourgish        |               805 |       0.031 |    0.867 |     698 | 21519 | 8239510 |    107 |
+| 61 | jav               | Javanese             |               615 |       0.030 |    0.361 |     222 |  7128 | 8254091 |    393 |
+| 62 | bos               | Bosnian              |               567 |       0.012 |    0.388 |     220 | 18770 | 8242497 |    347 |
+| 63 | mya               | Burmese              |               433 |       1.000 |    1.000 |     433 |     0 | 8261401 |      0 |
+| 64 | mri               | Maori                |               388 |       0.040 |    0.711 |     276 |  6622 | 8254824 |    112 |
+| 65 | fry               | Western Frisian      |               355 |       0.012 |    0.738 |     262 | 21054 | 8240425 |     93 |
+| 66 | tam               | Tamil                |               334 |       1.000 |    1.000 |     334 |     0 | 8261500 |      0 |
+| 67 | tel               | Telugu               |               254 |       1.000 |    1.000 |     254 |     0 | 8261580 |      0 |
+| 68 | kir               | Kirghiz              |               254 |       0.027 |    0.878 |     223 |  7974 | 8253606 |     31 |
+| 69 | xho               | Xhosa                |               252 |       0.039 |    0.683 |     172 |  4230 | 8257352 |     80 |
+| 70 | lao               | Lao                  |               219 |       1.000 |    1.000 |     219 |     0 | 8261615 |      0 |
+| 71 | amh               | Amharic              |               211 |       1.000 |    0.991 |     209 |     0 | 8261623 |      2 |
+| 72 | mlt               | Maltese              |               208 |       0.013 |    0.817 |     170 | 12489 | 8249137 |     38 |
+| 73 | pan               | Panjabi              |               196 |       1.000 |    0.995 |     195 |     0 | 8261638 |      1 |
+| 74 | kan               | Kannada              |               176 |       1.000 |    1.000 |     176 |     0 | 8261658 |      0 |
+| 75 | guj               | Gujarati             |               168 |       1.000 |    0.982 |     165 |     0 | 8261666 |      3 |
+| 76 | haw               | Hawaiian             |               155 |       0.010 |    0.839 |     130 | 12567 | 8249112 |     25 |
+| 77 | som               | Somali               |                80 |       0.019 |    0.912 |      73 |  3674 | 8258080 |      7 |
+| 78 | zul               | Zulu                 |                77 |       0.007 |    0.753 |      58 |  7839 | 8253918 |     19 |
+| 79 | smo               | Samoan               |                76 |       0.008 |    0.763 |      58 |  7277 | 8254481 |     18 |
+| 80 | hat               | Haitian              |                64 |       0.004 |    0.797 |      51 | 13257 | 8248513 |     13 |
+| 81 | tgk               | Tajik                |                63 |       0.008 |    0.889 |      56 |  7343 | 8254428 |      7 |
+| 82 | hau               | Hausa                |                60 |       0.006 |    0.800 |      48 |  7835 | 8253939 |     12 |
+| 83 | mlg               | Malagasy             |                59 |       0.003 |    0.831 |      49 | 14975 | 8246800 |     10 |
+| 84 | sin               | Sinhala              |                45 |       1.000 |    1.000 |      45 |     0 | 8261789 |      0 |
+| 85 | pus               | Pushto               |                44 |       0.098 |    0.864 |      38 |   350 | 8261440 |      6 |
+| 86 | sna               | Shona                |                42 |       0.006 |    0.667 |      28 |  5062 | 8256730 |     14 |
+| 87 | yor               | Yoruba               |                37 |       0.001 |    0.108 |       4 |  3799 | 8257998 |     33 |
+| 88 | ibo               | Igbo                 |                32 |       0.002 |    0.688 |      22 | 10813 | 8250989 |     10 |
+| 89 | sun               | Sundanese            |                31 |       0.003 |    0.548 |      17 |  5505 | 8256298 |     14 |
+| 90 | nya               | Nyanja               |                24 |       0.010 |    0.833 |      20 |  2072 | 8259738 |      4 |
+| 91 | cos               | Corsican             |                24 |       0.000 |    0.583 |      14 | 35270 | 8226540 |     10 |
+| 92 | snd               | Sindhi               |                 6 |       0.003 |    0.833 |       5 |  1440 | 8260388 |      1 |
+| 93 | sot               | Southern Sotho       |                 2 |       0.001 |    1.000 |       2 |  3240 | 8258592 |      0 |

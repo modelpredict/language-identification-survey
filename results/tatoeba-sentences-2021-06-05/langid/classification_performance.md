@@ -1,7 +1,7 @@
 # Classification performance for langid on tatoeba-sentences-2021-06-05
 
 - Dataset coverage (sentences in supported languages): 8298609 (86.08%)
-- **Aggregated accuracy: 0.8892028772532843**
+- **Aggregated accuracy: 0.8899956607185614**
 
 ## Supported languages (97)
 afr (Afrikaans), amh (Amharic), arg (Aragonese), ara (Arabic), asm (Assamese), aze (Azerbaijani), bel (Belarusian), bul (Bulgarian), ben (Bangla), bre (Breton), bos (Bosnian), cat (Catalan), ces (Czech), cym (Welsh), dan (Danish), deu (German), dzo (Dzongkha), ell (Greek), eng (English), epo (Esperanto), spa (Spanish), est (Estonian), eus (Basque), fas (Persian), fin (Finnish), fao (Faroese), fra (French), gle (Irish), glg (Galician), guj (Gujarati), heb (Hebrew), hin (Hindi), hrv (Croatian), hat (Haitian Creole), hun (Hungarian), hye (Armenian), ind (Indonesian), isl (Icelandic), ita (Italian), jpn (Japanese), jav (Javanese), kat (Georgian), kaz (Kazakh), khm (Khmer), kan (Kannada), kor (Korean), kur (Kurdish), kir (Kyrgyz), lat (Latin), ltz (Luxembourgish), lao (Lao), lit (Lithuanian), lav (Latvian), mlg (Malagasy), mkd (Macedonian), mal (Malayalam), mon (Mongolian), mar (Marathi), msa (Malay), mlt (Maltese), nob (Norwegian Bokmål), nep (Nepali), nld (Dutch), nno (Norwegian Nynorsk), nob (Norwegian Bokmål), oci (Occitan), ori (Odia), pan (Punjabi), pol (Polish), pus (Pashto), por (Portuguese), que (Quechua), ron (Romanian), rus (Russian), kin (Kinyarwanda), sme (Northern Sami), sin (Sinhala), slk (Slovak), slv (Slovenian), sqi (Albanian), srp (Serbian), swe (Swedish), swa (Swahili), tam (Tamil), tel (Telugu), tha (Thai), fil (Filipino), tur (Turkish), uig (Uyghur), ukr (Ukrainian), urd (Urdu), vie (Vietnamese), vol (Volapük), wln (Walloon), xho (Xhosa), zho (Chinese), zul (Zulu)
@@ -38,11 +38,11 @@ afr (Afrikaans), amh (Amharic), arg (Aragonese), ara (Arabic), asm (Assamese), a
 | 27 | ron               | Romanian              |             24943 |       0.637 |    0.906 |   22605 | 12867 | 8260799 |   2338 |
 | 28 | bul               | Bulgarian             |             24503 |       0.209 |    0.624 |   15278 | 57734 | 8216372 |   9225 |
 | 29 | vie               | Vietnamese            |             19234 |       0.956 |    0.998 |   19192 |   886 | 8278489 |     42 |
-| 30 | tgl               | Tagalog               |             16649 |       0.876 |    0.792 |   13181 |  1860 | 8280100 |   3468 |
+| 30 | fil               | Filipino              |             16649 |       0.876 |    0.792 |   13181 |  1860 | 8280100 |   3468 |
 | 31 | slk               | Slovak                |             14660 |       0.525 |    0.690 |   10119 |  9140 | 8274809 |   4541 |
 | 32 | ind               | Indonesian            |             14542 |       0.528 |    0.731 |   10632 |  9494 | 8274573 |   3910 |
 | 33 | hin               | Hindi                 |             14230 |       0.420 |    0.901 |   12825 | 17727 | 8266652 |   1405 |
-| 34 | nob               | Norwegian Bokmål      |             14223 |       0.348 |    0.308 |    4379 |  8203 | 8276183 |   9844 |
+| 34 | nob               | Norwegian Bokmål      |             14223 |       0.305 |    0.770 |   10958 | 24918 | 8259468 |   3265 |
 | 35 | bel               | Belarusian            |             12633 |       0.437 |    0.879 |   11106 | 14321 | 8271655 |   1527 |
 | 36 | isl               | Icelandic             |             11091 |       0.874 |    0.929 |   10300 |  1484 | 8286034 |    791 |
 | 37 | cat               | Catalan               |              7971 |       0.200 |    0.720 |    5739 | 22950 | 8267688 |   2232 |
