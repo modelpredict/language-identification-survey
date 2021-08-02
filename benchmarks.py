@@ -36,3 +36,10 @@ BENCHMARKS = {
     'supported_languages': [Language.get(lang).to_alpha3() for lang in pycld2.SUPPORTED_LANGUAGES],
   },
 }
+
+
+def common_languages():
+  supported_languages = set(BENCHMARKS['fasttext']['supported_languages'])
+  for b in BENCHMARKS:
+    supported_languages = supported_languages.intersection(BENCHMARKS[b]['supported_languages'])
+  return supported_languages

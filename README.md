@@ -18,6 +18,11 @@ Available benchmarks:
 - langid
 - pycld2
 
+Available datasets:
+- tatoeba-sentences-2021-06-05
+- tatoeba-sentences-2021-06-05-common-48
+- open-subtitles-v2018-100k-per-lang
+
 On the host machine.
 ```bash
 python run.py <benchmark_name>

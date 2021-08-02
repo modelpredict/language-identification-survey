@@ -2,6 +2,9 @@
 datasets/**/**.bz2
 datasets/**/**.gzip
 datasets/**/**.csv
+datasets/**/**.txt
+results/**/**.npy
+results/**/results.csv
 
 .DS_Store
 

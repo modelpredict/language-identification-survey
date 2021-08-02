@@ -32,13 +32,24 @@ def run(dataset, elapsed):
   lang = np.chararray(len(dataset), itemsize=10)
   prob = np.zeros((len(dataset),), dtype=np.float)
 
-  for i, text in enumerate(dataset):
-    iter_start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
-    result = pycld2.detect(text)
-    elapsed[i] = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - iter_start_time
+  errored = 0
 
-    lang_label = result[2][0][1]
-    lang[i] = lang_label if lang_label != 'un' else None
-    prob[i] = float('nan')
+  for i, text in enumerate(dataset):
+    try:
+      iter_start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
+      result = pycld2.detect(text)
+      elapsed[i] = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - iter_start_time
+
+      lang_label = result[2][0][1]
+      lang[i] = lang_label if lang_label != 'un' else None
+      prob[i] = float('nan')
+    except pycld2.error:
+      # Unfortunately, pycld2 errors on "invalid utf-8" sequence for some texts,
+      # even though python successfully loads, encodes and decodes them as utf-8.
+      errored += 1
+      lang[i] = None
+      prob[i] = float('nan')
+
+  print(f"pycld2 errored on {errored} texts")
 
   return dict(lang=lang, prob=prob)
