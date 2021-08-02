@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.en.gz" | gzip -d -c | head -n 100000 > en.txt
+
 # Languages commented out are not supported by some benchmarks
 curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.af.gz" | gzip -d -c | head -n 100000 > ar.txt
 curl -s --location-trusted --max-redirs 10 -J "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.ar.gz" | gzip -d -c | head -n 100000 > ar.txt
