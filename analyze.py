@@ -44,6 +44,7 @@ def get_stats_per_language(results):
     fn = (results['alpha3'] == lang) & (results['detected_lang_alpha3'] != lang)
     precision = tp.sum() / (tp.sum() + fp.sum())
     recall = tp.sum() / (tp.sum() + fn.sum())
+    f1 = tp.sum() / (tp.sum() + (fp.sum() + fn.sum()/2))
     class_metrics[lang] = dict(
       sentences_count=tp.sum()+fn.sum(),
       precision=precision,
@@ -52,6 +53,7 @@ def get_stats_per_language(results):
       fp=fp.sum(),
       tn=tn.sum(),
       fn=fn.sum(),
+      f1=f1,
     )
 
   stats_per_language = pd.DataFrame.from_records(data=list(class_metrics.values()), index=list(class_metrics.keys()))
