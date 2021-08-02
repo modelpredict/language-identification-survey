@@ -10,31 +10,38 @@ from langcodes import Language
 import datasets
 import dataset_analysis
 from benchmarks import BENCHMARKS
-from langtools import get_iso_alpha3
+from langcodes import Language
+
+
+def get_alpha3(l):
+  try:
+    return Language.get(l).to_alpha3()
+  except:
+    return 'unk'
 
 
 def read_results(dataset_name, benchmark_name='fasttext', lang_dtype='str'):
   results_path = os.path.join('results', dataset_name, benchmark_name, 'results.csv')
   results = pd.read_csv(results_path, sep=',', index_col=0, names=['detected_lang', 'detected_prob'])
-  # langdetect returns nan for small number of rows. We'll just convert them to strings
+  # langdetect/pycld2 returns nan for small number of rows. We'll just convert them to strings
   results['detected_lang'] = results['detected_lang'].astype(str)
-  results['detected_lang_alpha3'] = results['detected_lang'].apply(lambda x: get_iso_alpha3(x.replace('__label__', ''))).astype(lang_dtype)
+  results['detected_lang_alpha3'] = results['detected_lang'].apply(lambda x: get_alpha3(x.replace('__label__', ''))).astype(lang_dtype)
   return results
 
 
 def accuracy(results_df):
-  correct = (results_df['language'] == results_df['detected_lang_alpha3']).astype(int)
+  correct = (results_df['alpha3'] == results_df['detected_lang_alpha3']).astype(int)
   return correct.mean()
 
 
 def get_stats_per_language(results):
-  langs = results['language'].unique().tolist()
+  langs = results['alpha3'].unique().tolist()
   class_metrics = {}
   for lang in langs:
-    tp = (results['language'] == lang) & (results['detected_lang_alpha3'] == lang)
-    fp = (results['language'] != lang) & (results['detected_lang_alpha3'] == lang)
-    tn = (results['language'] != lang) & (results['detected_lang_alpha3'] != lang)
-    fn = (results['language'] == lang) & (results['detected_lang_alpha3'] != lang)
+    tp = (results['alpha3'] == lang) & (results['detected_lang_alpha3'] == lang)
+    fp = (results['alpha3'] != lang) & (results['detected_lang_alpha3'] == lang)
+    tn = (results['alpha3'] != lang) & (results['detected_lang_alpha3'] != lang)
+    fn = (results['alpha3'] == lang) & (results['detected_lang_alpha3'] != lang)
     precision = tp.sum() / (tp.sum() + fp.sum())
     recall = tp.sum() / (tp.sum() + fn.sum())
     class_metrics[lang] = dict(
@@ -64,7 +71,7 @@ def get_stats_per_language(results):
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Write aggregated results files.')
-  parser.add_argument('--dataset_name', '-d', type=str, default='tatoeba-sentences-2021-06-05')
+  parser.add_argument('--dataset', '-d', type=str, default='tatoeba-sentences-2021-06-05')
   parser.add_argument('--timings_prefix', '-t', type=str, default='', help='Prefix of the times.npy file')
   parser.add_argument("--timings", type=bool, nargs='?', const=True, default=False, help='Analyze timings')
   parser.add_argument("--correctness", type=bool, nargs='?', const=True, default=False, help='Analyze correctness')
@@ -72,23 +79,24 @@ if __name__ == "__main__":
 
   jinja_env = Environment(loader=FileSystemLoader("./templates"), autoescape=select_autoescape())
 
-  dataset_name = args.dataset_name
+  dataset_name = args.dataset
   timings_prefix = args.timings_prefix
   dataset = datasets.get(dataset_name)
 
   for benchmark_name in BENCHMARKS.keys():
     benchmark_results_path = pathlib.Path('results') / dataset_name / benchmark_name
+    print()
     if not benchmark_results_path.exists():
       print(f"Skipping {benchmark_name}. Results files not found on {benchmark_results_path}")
+      continue
 
     if args.correctness:
       print(f"Analyzing {benchmark_name} results on {dataset_name}...")
 
-      supported_languages_raw = BENCHMARKS[benchmark_name]['supported_languages_raw']
-      supported_languages = [Language.get(lang) for lang in supported_languages_raw]
+      supported_languages = BENCHMARKS[benchmark_name]['supported_languages']
       supported_languages_list_str = ", ".join(f"{lang.to_alpha3()} ({lang.display_name()})" for lang in supported_languages)
 
-      results = read_results(dataset_name, benchmark_name, lang_dtype=dataset.dtypes['language'])
+      results = read_results(dataset_name, benchmark_name, lang_dtype=dataset.dtypes['alpha3'])
       supported_langs = BENCHMARKS[benchmark_name]['supported_languages']
       dataset_subset = datasets.get_supported_dataset_subset(dataset, supported_languages=supported_langs)
       joined_results = dataset_subset.join(results)

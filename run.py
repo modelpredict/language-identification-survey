@@ -35,14 +35,15 @@ if __name__ == "__main__":
   parser.add_argument('benchmarks', nargs='+')
   parser.add_argument('--examples-lo', '-lo', type=int)
   parser.add_argument('--examples-hi', '-hi', type=int)
+  parser.add_argument('--dataset', type=str, default="tatoeba-sentences-2021-06-05")
   args = parser.parse_args()
 
-  print('Loading big dataset...')
-  dataset = datasets.tatoeba_sentences_2021_06_05()
-  dataset_name = "tatoeba-sentences-2021-06-05"
+  print(f'Loading dataset {args.dataset}...')
+  dataset = datasets.get(args.dataset)
 
   for benchmark_name in args.benchmarks:
     benchmark = BENCHMARKS[benchmark_name]
+    print()
     print(f'Loaded benchmark {benchmark_name}')
 
     supported_dataset = datasets.get_supported_dataset_subset(dataset, benchmark['supported_languages'])
@@ -57,10 +58,10 @@ if __name__ == "__main__":
     elapsed = np.zeros((hi-lo,))
     predictions = benchmark['run'](tqdm.tqdm(benchmark_dataset.text), elapsed)
 
-    os.makedirs(f'results/{dataset_name}/{benchmark_name}/', exist_ok=True)
+    os.makedirs(f'results/{args.dataset}/{benchmark_name}/', exist_ok=True)
 
     total_elapsed = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - total_start_time
     report_basic_timings(elapsed_in_fn=elapsed, total_elapsed=total_elapsed)
-    np.save(f'results/{dataset_name}/{benchmark_name}/times.npy', elapsed)
+    np.save(f'results/{args.dataset}/{benchmark_name}/times.npy', elapsed)
 
-    save_predictions(f'results/{dataset_name}/{benchmark_name}/results.csv', predictions, original_dataset=benchmark_dataset)
+    save_predictions(f'results/{args.dataset}/{benchmark_name}/results.csv', predictions, original_dataset=benchmark_dataset)
