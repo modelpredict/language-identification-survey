@@ -101,7 +101,7 @@ if __name__ == "__main__":
       supported_langs = BENCHMARKS[benchmark_name]['supported_languages_alpha3']
       dataset_subset = datasets.get_supported_dataset_subset(dataset, supported_languages=supported_langs)
       print(f"Merging with dataset...")
-      joined_results = dataset_subset.join(results)
+      joined_results = pd.merge(dataset_subset, results, left_index=True, right_index=True, how="left", validate="one_to_one")
 
       print(f"Calculating accuracy...")
       aggregated_accuracy = accuracy(joined_results)

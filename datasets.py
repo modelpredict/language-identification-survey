@@ -58,7 +58,7 @@ def open_subtitles_v2018_100k_per_lang():
     )
     dfs.append(pd.DataFrame(data=data))
 
-  big_df = pd.concat(dfs)
+  big_df = pd.concat(dfs).reset_index().drop('index', axis=1)
   big_df['language'] = big_df['language'].astype("category")
   big_df['alpha3'] = big_df['language'].apply(get_alpha3).astype("category")
   return big_df
