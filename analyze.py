@@ -8,7 +8,7 @@ from jinja2 import Environment, select_autoescape, FileSystemLoader
 from langcodes import Language
 
 import datasets
-import dataset_analysis
+import analyze_dataset
 from benchmarks import BENCHMARKS
 from langcodes import Language
 
@@ -61,7 +61,7 @@ def get_stats_per_language(results):
   stats_per_language = stats_per_language.reset_index()
 
   # assign the language
-  stats_per_language['language'] = stats_per_language['language_alpha3'].apply(dataset_analysis.get_language_name)
+  stats_per_language['language'] = stats_per_language['language_alpha3'].apply(analyze_dataset.get_language_name)
 
   # sort by sentences count and set the index to be row number
   stats_per_language.sort_values(['sentences_count'], ascending=False, inplace=True)
