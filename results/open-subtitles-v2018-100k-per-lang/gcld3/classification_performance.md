@@ -3,10 +3,12 @@
 - Dataset coverage (sentences in supported languages): 4236418 (100.00%)
 - **Aggregated accuracy: 0.7307553220668971**
 
-## Supported languages (107)
+<h2 id="supported-languages">Supported languages (107)</h2>
+
 afr (Afrikaans), amh (Amharic), ara (Arabic), bul (Bulgarian), bul (Bulgarian), ben (Bangla), bos (Bosnian), cat (Catalan), ceb (Cebuano), cos (Corsican), ces (Czech), cym (Welsh), dan (Danish), deu (German), ell (Greek), ell (Greek), eng (English), epo (Esperanto), spa (Spanish), est (Estonian), eus (Basque), fas (Persian), fin (Finnish), fil (Filipino), fra (French), fry (Western Frisian), gle (Irish), gla (Scottish Gaelic), glg (Galician), guj (Gujarati), hau (Hausa), haw (Hawaiian), hin (Hindi), hin (Hindi), hmn (Hmong), hrv (Croatian), hat (Haitian Creole), hun (Hungarian), hye (Armenian), ind (Indonesian), ibo (Igbo), isl (Icelandic), ita (Italian), heb (Hebrew), jpn (Japanese), jpn (Japanese), jav (Javanese), kat (Georgian), kaz (Kazakh), khm (Khmer), kan (Kannada), kor (Korean), kur (Kurdish), kir (Kyrgyz), lat (Latin), ltz (Luxembourgish), lao (Lao), lit (Lithuanian), lav (Latvian), mlg (Malagasy), mri (Maori), mkd (Macedonian), mal (Malayalam), mon (Mongolian), mar (Marathi), msa (Malay), mlt (Maltese), mya (Burmese), nep (Nepali), nld (Dutch), nob (Norwegian Bokmål), nya (Nyanja), pan (Punjabi), pol (Polish), pus (Pashto), por (Portuguese), ron (Romanian), rus (Russian), rus (Russian), snd (Sindhi), sin (Sinhala), slk (Slovak), slv (Slovenian), smo (Samoan), sna (Shona), som (Somali), sqi (Albanian), srp (Serbian), sot (Southern Sotho), sun (Sundanese), swe (Swedish), swa (Swahili), tam (Tamil), tel (Telugu), tgk (Tajik), tha (Thai), tur (Turkish), ukr (Ukrainian), urd (Urdu), uzb (Uzbek), vie (Vietnamese), xho (Xhosa), yid (Yiddish), yor (Yoruba), zho (Chinese), zho (Chinese), zul (Zulu)
 
-## Stats per language
+<h2 id="metrics-per-language">Stats per language</h2>
+
 |    | language_alpha3   | language         |   sentences_count |   precision |   recall |    f1 |    tp |    fp |      tn |    fn |
 |---:|:------------------|:-----------------|------------------:|------------:|---------:|------:|------:|------:|--------:|------:|
 |  1 | ell               | Greek            |            100000 |       0.930 |    0.991 | 0.927 | 99142 |  7411 | 4129007 |   858 |

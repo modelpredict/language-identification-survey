@@ -3,10 +3,12 @@
 - Dataset coverage (sentences in supported languages): 4236418 (100.00%)
 - **Aggregated accuracy: 0.7419090845143231**
 
-## Supported languages (97)
+<h2 id="supported-languages">Supported languages (97)</h2>
+
 afr (Afrikaans), amh (Amharic), arg (Aragonese), ara (Arabic), asm (Assamese), aze (Azerbaijani), bel (Belarusian), bul (Bulgarian), ben (Bangla), bre (Breton), bos (Bosnian), cat (Catalan), ces (Czech), cym (Welsh), dan (Danish), deu (German), dzo (Dzongkha), ell (Greek), eng (English), epo (Esperanto), spa (Spanish), est (Estonian), eus (Basque), fas (Persian), fin (Finnish), fao (Faroese), fra (French), gle (Irish), glg (Galician), guj (Gujarati), heb (Hebrew), hin (Hindi), hrv (Croatian), hat (Haitian Creole), hun (Hungarian), hye (Armenian), ind (Indonesian), isl (Icelandic), ita (Italian), jpn (Japanese), jav (Javanese), kat (Georgian), kaz (Kazakh), khm (Khmer), kan (Kannada), kor (Korean), kur (Kurdish), kir (Kyrgyz), lat (Latin), ltz (Luxembourgish), lao (Lao), lit (Lithuanian), lav (Latvian), mlg (Malagasy), mkd (Macedonian), mal (Malayalam), mon (Mongolian), mar (Marathi), msa (Malay), mlt (Maltese), nob (Norwegian Bokmål), nep (Nepali), nld (Dutch), nno (Norwegian Nynorsk), nob (Norwegian Bokmål), oci (Occitan), ori (Odia), pan (Punjabi), pol (Polish), pus (Pashto), por (Portuguese), que (Quechua), ron (Romanian), rus (Russian), kin (Kinyarwanda), sme (Northern Sami), sin (Sinhala), slk (Slovak), slv (Slovenian), sqi (Albanian), srp (Serbian), swe (Swedish), swa (Swahili), tam (Tamil), tel (Telugu), tha (Thai), fil (Filipino), tur (Turkish), uig (Uyghur), ukr (Ukrainian), urd (Urdu), vie (Vietnamese), vol (Volapük), wln (Walloon), xho (Xhosa), zho (Chinese), zul (Zulu)
 
-## Stats per language
+<h2 id="metrics-per-language">Stats per language</h2>
+
 |    | language_alpha3   | language         |   sentences_count |   precision |   recall |    f1 |    tp |     fp |      tn |    fn |
 |---:|:------------------|:-----------------|------------------:|------------:|---------:|------:|------:|-------:|--------:|------:|
 |  1 | ell               | Greek            |            100000 |       0.999 |    0.996 | 0.998 | 99645 |     69 | 4136349 |   355 |

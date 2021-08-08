@@ -3,10 +3,12 @@
 - Dataset coverage (sentences in supported languages): 4236418 (100.00%)
 - **Aggregated accuracy: 0.794824542809515**
 
-## Supported languages (55)
+<h2 id="supported-languages">Supported languages (55)</h2>
+
 afr (Afrikaans), ara (Arabic), bul (Bulgarian), ben (Bangla), cat (Catalan), ces (Czech), cym (Welsh), dan (Danish), deu (German), ell (Greek), eng (English), spa (Spanish), est (Estonian), fas (Persian), fin (Finnish), fra (French), guj (Gujarati), heb (Hebrew), hin (Hindi), hrv (Croatian), hun (Hungarian), ind (Indonesian), ita (Italian), jpn (Japanese), kan (Kannada), kor (Korean), lit (Lithuanian), lav (Latvian), mkd (Macedonian), mal (Malayalam), mar (Marathi), nep (Nepali), nld (Dutch), nob (Norwegian Bokmål), pan (Punjabi), pol (Polish), por (Portuguese), ron (Romanian), rus (Russian), slk (Slovak), slv (Slovenian), som (Somali), sqi (Albanian), swe (Swedish), swa (Swahili), tam (Tamil), tel (Telugu), tha (Thai), fil (Filipino), tur (Turkish), ukr (Ukrainian), urd (Urdu), vie (Vietnamese), zho (Chinese), zho (Chinese)
 
-## Stats per language
+<h2 id="metrics-per-language">Stats per language</h2>
+
 |    | language_alpha3   | language         |   sentences_count |   precision |   recall |    f1 |    tp |    fp |      tn |    fn |
 |---:|:------------------|:-----------------|------------------:|------------:|---------:|------:|------:|------:|--------:|------:|
 |  1 | ell               | Greek            |            100000 |       1.000 |    0.996 | 0.998 | 99615 |     0 | 4136418 |   385 |

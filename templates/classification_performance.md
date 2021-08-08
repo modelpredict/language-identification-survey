@@ -3,8 +3,10 @@
 - Dataset coverage (sentences in supported languages): {{dataset_len}} ({{dataset_supported_pct}})
 - **Aggregated accuracy: {{accuracy}}**
 
-## Supported languages ({{supported_languages_count}})
+<h2 id="supported-languages">Supported languages ({{supported_languages_count}})</h2>
+
 {{supported_languages_list_str}}
 
-## Stats per language
+<h2 id="metrics-per-language">Stats per language</h2>
+
 {{stats_per_language}}

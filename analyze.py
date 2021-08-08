@@ -6,11 +6,15 @@ import numpy as np
 
 from jinja2 import Environment, select_autoescape, FileSystemLoader
 from langcodes import Language
+from typing import Dict, Any
 
 import datasets
 import analyze_dataset
 from benchmarks import BENCHMARKS
 from langcodes import Language
+
+
+jinja_env = Environment(loader=FileSystemLoader("./templates"), autoescape=select_autoescape())
 
 
 def get_alpha3(l):
@@ -71,6 +75,34 @@ def get_stats_per_language(results):
   return stats_per_language[['language_alpha3', 'language', 'sentences_count', 'precision', 'recall', 'f1', 'tp', 'fp', 'tn', 'fn']]
 
 
+def md_link(text, url):
+  return f"[{text}]({url})"
+
+
+def create_dataset_results_table(dataset_name, metrics_per_benchmark):
+  link_base = "https://github.com/modelpredict/language-identification-survey/blob/main/results/"
+
+  for benchmark_name, row in metrics_per_benchmark.items():
+    per_language_link = os.path.join(link_base, dataset_name, benchmark_name, f"classification_performance.md#metrics-per-language")
+    acc_link = os.path.join(link_base, dataset_name, benchmark_name, f"classification_performance.md")
+    supported_languages_link = os.path.join(link_base, dataset_name, benchmark_name, f"classification_performance.md#supported-languages")
+
+    row['per_language_link'] = md_link("See metrics", per_language_link)
+    row['agg_accuracy'] = md_link("{:.2f}%".format(row['agg_accuracy'] * 100), acc_link)
+    row['supported_languages'] = md_link(row['supported_languages'], supported_languages_link)
+
+  df = pd.DataFrame.from_records([{'name':k, **v} for k, v in metrics_per_benchmark.items()])
+  df.columns=['Library', 'Supported languages', '# sentences supported', 'Aggregated accuracy', 'Per language metrics']
+  return df
+
+
+def write_md(template_name: str, template_ctx: Dict[str, Any], path: str):
+    tmpl = jinja_env.get_template(f'{template_name}.md')
+    rendered = tmpl.render(template_ctx)
+    with open(path, 'w') as fd:
+      fd.write(rendered)
+
+
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Write aggregated results files.')
   parser.add_argument('--dataset', '-d', type=str, choices=datasets.names(), required=True)
@@ -79,11 +111,11 @@ if __name__ == "__main__":
   parser.add_argument("--correctness", type=bool, nargs='?', const=True, default=False, help='Analyze correctness')
   args = parser.parse_args()
 
-  jinja_env = Environment(loader=FileSystemLoader("./templates"), autoescape=select_autoescape())
-
   dataset_name = args.dataset
   timings_prefix = args.timings_prefix
   dataset = datasets.get(dataset_name)
+
+  metrics_per_benchmark = {}
 
   for benchmark_name in BENCHMARKS.keys():
     benchmark_results_path = pathlib.Path('results') / dataset_name / benchmark_name
@@ -109,14 +141,20 @@ if __name__ == "__main__":
       aggregated_accuracy = accuracy(joined_results)
       print(f"Calculating metrics per language...")
       stats_per_language = get_stats_per_language(joined_results)
+      dataset_supported_pct = "{:.2f}%".format(100. * len(dataset_subset) / len(dataset))
+
+      metrics_per_benchmark[benchmark_name] = {
+        'supported_languages': len(supported_langs),
+        'supported_dataset': f"{len(dataset):,} ({dataset_supported_pct})",
+        'agg_accuracy': aggregated_accuracy,
+      }
 
       # assemble the md file and write it
-      tmpl = jinja_env.get_template('classification_performance.md')
-      rendered = tmpl.render(
+      template_ctx = dict(
         benchmark_name=benchmark_name,
         dataset_name=dataset_name,
         dataset_len=len(dataset_subset),
-        dataset_supported_pct="{:.2f}%".format(100. * len(dataset_subset) / len(dataset)),
+        dataset_supported_pct=dataset_supported_pct,
         supported_languages_count=len(supported_languages),
         supported_languages_list_str=supported_languages_list_str,
         accuracy=aggregated_accuracy,
@@ -124,13 +162,11 @@ if __name__ == "__main__":
       )
       results_path = os.path.join('results', dataset_name, benchmark_name, 'classification_performance.md')
       print(f"Dumping classification performance analysis to {results_path}")
-      with open(results_path, 'w') as fd:
-        fd.write(rendered)
+      write_md('classification_performance', template_ctx=template_ctx, path=results_path)
 
     if args.timings:
       times = np.load(os.path.join('results', dataset_name, benchmark_name, f'{timings_prefix}times.npy'))
-      tmpl = jinja_env.get_template('speed_performance.md')
-      rendered = tmpl.render(
+      template_ctx = dict(
         benchmark_name=benchmark_name,
         dataset_name=dataset_name,
         latency_avg=np.mean(times) / 10**6,
@@ -141,7 +177,17 @@ if __name__ == "__main__":
         latency_p99=np.quantile(times, [0.99])[0] / 10**6,
         throughput=10**9/np.mean(times),
       )
+
       results_path = os.path.join('results', dataset_name, benchmark_name, f'{timings_prefix}speed_performance.md')
       print(f"Dumping latency/throughput analysis to {results_path}")
-      with open(results_path, 'w') as fd:
-        fd.write(rendered)
+      write_md('speed_performance', template_ctx=template_ctx, path=results_path)
+
+  print(f"Creating aggregated table for {dataset_name}")
+  agg_table_path = os.path.join('results', dataset_name, 'results.md')
+  df = create_dataset_results_table(dataset_name, metrics_per_benchmark)
+  template_ctx = dict(
+    dataset_name=dataset_name,
+    results_table=df.to_markdown(floatfmt=".3f", index=False)
+  )
+  write_md('dataset_results', template_ctx=template_ctx, path=agg_table_path)
+  print(f"Written in {agg_table_path}")
