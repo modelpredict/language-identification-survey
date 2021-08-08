@@ -3,10 +3,12 @@
 - Dataset coverage (sentences in supported languages): 4236418 (100.00%)
 - **Aggregated accuracy: 0.6840554921634268**
 
-## Supported languages (83)
+<h2 id="supported-languages">Supported languages (83)</h2>
+
 afr (Afrikaans), sqi (Albanian), ara (Arabic), hye (Armenian), aze (Azerbaijani), eus (Basque), bel (Belarusian), ben (Bangla), bih (Bihari languages), bul (Bulgarian), cat (Catalan), ceb (Cebuano), chr (Cherokee), hrv (Croatian), ces (Czech), zho (Chinese), dan (Danish), div (Divehi), nld (Dutch), eng (English), est (Estonian), fin (Finnish), fra (French), glg (Galician), lug (Ganda), kat (Georgian), deu (German), ell (Greek), guj (Gujarati), hat (Haitian Creole), heb (Hebrew), hin (Hindi), hmn (Hmong), hun (Hungarian), isl (Icelandic), ind (Indonesian), iku (Inuktitut), gle (Irish), ita (Italian), jav (Javanese), jpn (Japanese), kan (Kannada), khm (Khmer), kin (Kinyarwanda), kor (Korean), lao (Lao), lav (Latvian), lif (Limbu), lit (Lithuanian), mkd (Macedonian), msa (Malay), mal (Malayalam), mlt (Maltese), mar (Marathi), nep (Nepali), nob (Norwegian Bokmål), ori (Odia), fas (Persian), pol (Polish), por (Portuguese), pan (Punjabi), ron (Romanian), rus (Russian), gla (Scottish Gaelic), srp (Serbian), sin (Sinhala), slk (Slovak), slv (Slovenian), spa (Spanish), swa (Swahili), swe (Swedish), syr (Syriac), fil (Filipino), tam (Tamil), tel (Telugu), tha (Thai), tur (Turkish), ukr (Ukrainian), urd (Urdu), vie (Vietnamese), cym (Welsh), yid (Yiddish), zho (Chinese)
 
-## Stats per language
+<h2 id="metrics-per-language">Stats per language</h2>
+
 |    | language_alpha3   | language         |   sentences_count |   precision |   recall |    f1 |    tp |    fp |      tn |    fn |
 |---:|:------------------|:-----------------|------------------:|------------:|---------:|------:|------:|------:|--------:|------:|
 |  1 | ell               | Greek            |            100000 |       1.000 |    0.997 | 0.998 | 99664 |    26 | 4136392 |   336 |
