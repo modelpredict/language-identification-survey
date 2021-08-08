@@ -1,7 +1,7 @@
 # Classification performance for gcld3 on tatoeba-sentences-2021-06-05
 
 - Dataset coverage (sentences in supported languages): 8261834 (85.70%)
-- **Aggregated accuracy: 0.8711048902701265**
+- **Aggregated accuracy: 87.11%**
 
 <h2 id="supported-languages">Supported languages (107)</h2>
 

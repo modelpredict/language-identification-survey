@@ -88,7 +88,7 @@ def create_dataset_results_table(dataset_name, metrics_per_benchmark):
     supported_languages_link = os.path.join(link_base, dataset_name, benchmark_name, f"classification_performance.md#supported-languages")
 
     row['per_language_link'] = md_link("See metrics", per_language_link)
-    row['agg_accuracy'] = md_link("{:.2f}%".format(row['agg_accuracy'] * 100), acc_link)
+    row['agg_accuracy'] = md_link(row['agg_accuracy'], acc_link)
     row['supported_languages'] = md_link(row['supported_languages'], supported_languages_link)
 
   df = pd.DataFrame.from_records([{'name':k, **v} for k, v in metrics_per_benchmark.items()])
@@ -146,7 +146,7 @@ if __name__ == "__main__":
       metrics_per_benchmark[benchmark_name] = {
         'supported_languages': len(supported_langs),
         'supported_dataset': f"{len(dataset):,} ({dataset_supported_pct})",
-        'agg_accuracy': aggregated_accuracy,
+        'agg_accuracy': "{:.2f}%".format(100. * aggregated_accuracy),
       }
 
       # assemble the md file and write it
@@ -157,7 +157,7 @@ if __name__ == "__main__":
         dataset_supported_pct=dataset_supported_pct,
         supported_languages_count=len(supported_languages),
         supported_languages_list_str=supported_languages_list_str,
-        accuracy=aggregated_accuracy,
+        accuracy="{:.2f}%".format(100. * aggregated_accuracy),
         stats_per_language=stats_per_language.to_markdown(floatfmt=".3f"),
       )
       results_path = os.path.join('results', dataset_name, benchmark_name, 'classification_performance.md')

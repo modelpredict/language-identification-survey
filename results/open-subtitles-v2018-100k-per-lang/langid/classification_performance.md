@@ -1,7 +1,7 @@
 # Classification performance for langid on open-subtitles-v2018-100k-per-lang
 
 - Dataset coverage (sentences in supported languages): 4236418 (100.00%)
-- **Aggregated accuracy: 0.7419090845143231**
+- **Aggregated accuracy: 74.19%**
 
 <h2 id="supported-languages">Supported languages (97)</h2>
 

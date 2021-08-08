@@ -1,7 +1,7 @@
 # Classification performance for langdetect on open-subtitles-v2018-100k-per-lang
 
 - Dataset coverage (sentences in supported languages): 4236418 (100.00%)
-- **Aggregated accuracy: 0.794824542809515**
+- **Aggregated accuracy: 79.48%**
 
 <h2 id="supported-languages">Supported languages (55)</h2>
 

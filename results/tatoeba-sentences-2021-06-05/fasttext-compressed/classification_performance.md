@@ -1,7 +1,7 @@
 # Classification performance for fasttext-compressed on tatoeba-sentences-2021-06-05
 
 - Dataset coverage (sentences in supported languages): 8448970 (87.64%)
-- **Aggregated accuracy: 0.968111024184013**
+- **Aggregated accuracy: 96.81%**
 
 <h2 id="supported-languages">Supported languages (176)</h2>
 

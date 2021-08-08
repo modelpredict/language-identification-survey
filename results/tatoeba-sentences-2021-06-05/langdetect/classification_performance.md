@@ -1,7 +1,7 @@
 # Classification performance for langdetect on tatoeba-sentences-2021-06-05
 
 - Dataset coverage (sentences in supported languages): 7461707 (77.40%)
-- **Aggregated accuracy: 0.9245361684665453**
+- **Aggregated accuracy: 92.45%**
 
 <h2 id="supported-languages">Supported languages (55)</h2>
 

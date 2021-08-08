@@ -1,7 +1,7 @@
 # Classification performance for langid on tatoeba-sentences-2021-06-05
 
 - Dataset coverage (sentences in supported languages): 8298609 (86.08%)
-- **Aggregated accuracy: 0.8899956607185614**
+- **Aggregated accuracy: 89.00%**
 
 <h2 id="supported-languages">Supported languages (97)</h2>
 

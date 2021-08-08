@@ -1,7 +1,7 @@
 # Classification performance for pycld2 on open-subtitles-v2018-100k-per-lang
 
 - Dataset coverage (sentences in supported languages): 4236418 (100.00%)
-- **Aggregated accuracy: 0.6840554921634268**
+- **Aggregated accuracy: 68.41%**
 
 <h2 id="supported-languages">Supported languages (83)</h2>
 

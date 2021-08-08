@@ -1,7 +1,7 @@
 # Classification performance for pycld2 on tatoeba-sentences-2021-06-05
 
 - Dataset coverage (sentences in supported languages): 7569549 (78.52%)
-- **Aggregated accuracy: 0.8694755790602584**
+- **Aggregated accuracy: 86.95%**
 
 <h2 id="supported-languages">Supported languages (83)</h2>
 

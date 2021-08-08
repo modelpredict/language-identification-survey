@@ -1,7 +1,7 @@
 # Classification performance for fasttext-compressed on open-subtitles-v2018-100k-per-lang
 
 - Dataset coverage (sentences in supported languages): 4236418 (100.00%)
-- **Aggregated accuracy: 0.752107794839886**
+- **Aggregated accuracy: 75.21%**
 
 <h2 id="supported-languages">Supported languages (176)</h2>
 
